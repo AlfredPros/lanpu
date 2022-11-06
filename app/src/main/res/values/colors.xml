@@ -10,4 +10,5 @@
     <color name="yellow">#FFF500</color>
     <color name="green">#05EC00</color>
     <color name="lighter_black">#272727</color>
+    <color name="random">#909090</color>
 </resources>
