@@ -5,13 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeFragment"
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp">
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:background="#FFF500">
 
     <TableLayout
         android:id="@+id/tl_history"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -26,20 +27,22 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/history_from_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="From"
-                android:layout_marginStart="4dp" />
+                android:layout_marginStart="4dp"
+                android:textColor="#272727"/>
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/history_to_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginStart="4dp"
-                android:text="To"/>
+                android:text="To"
+                android:textColor="#272727"/>
 
         </TableRow>
 
@@ -48,24 +51,26 @@
             android:layout_height="match_parent">
 
             <EditText
-                android:id="@+id/editTextDate"
+                android:id="@+id/history_from_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="HH/BB/TTTT"
                 android:inputType="date"
-                android:minHeight="48dp" />
+                android:minHeight="48dp"
+                android:textColor="#272727"/>
 
             <EditText
-                android:id="@+id/editTextDate2"
+                android:id="@+id/history_to_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="HH/BB/TTTT"
                 android:inputType="date"
-                android:minHeight="48dp" />
+                android:minHeight="48dp"
+                android:textColor="#272727"/>
 
         </TableRow>
 
@@ -74,7 +79,7 @@
             android:layout_height="match_parent">
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/history_filter_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -83,7 +88,7 @@
                 android:layout_marginEnd="4dp"/>
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/history_reset_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -107,19 +112,31 @@
         </TableRow>
     </TableLayout>
 
-    <TextView
-        android:id="@+id/text_home"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_history"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="0dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="0dp"
         android:textAlignment="center"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
 
+        app:layout_constraintBottom_toTopOf="@+id/history_space"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tl_history"
-        app:layout_constraintVertical_bias="0"/>
+        app:layout_constraintVertical_bias="0">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <Space
+        android:id="@+id/history_space"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1" />
 </androidx.constraintlayout.widget.ConstraintLayout>
