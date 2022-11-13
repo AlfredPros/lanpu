@@ -24,7 +24,7 @@ public class LoginSignUpActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intentLogin = new Intent(LoginSignUpActivity.this, LoginActivity.class);
                 startActivity(intentLogin);
-                finish();
+//                finish();
             }
         });
 
@@ -33,7 +33,7 @@ public class LoginSignUpActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intentSignUp = new Intent(LoginSignUpActivity.this, SignUpActivity.class);
                 startActivity(intentSignUp);
-                finish();
+//                finish();
             }
         });
     }
