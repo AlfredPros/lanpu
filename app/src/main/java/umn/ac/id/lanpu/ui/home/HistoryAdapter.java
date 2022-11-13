@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -67,6 +68,17 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.KataView
     }
 
     public void removeAll(int totalSize) {
+        if (totalSize > 0) {
+            for (int i=0; i<totalSize; i++) {
+                int position = 0;
+                mDaftarKata.remove(position);
+                notifyItemRemoved(position);
+                notifyItemRangeChanged(position, mDaftarKata.size());
+            }
+        }
+    }
+
+    public void filterItem(int totalSize) {
         if (totalSize > 0) {
             for (int i=0; i<totalSize; i++) {
                 int position = 0;
