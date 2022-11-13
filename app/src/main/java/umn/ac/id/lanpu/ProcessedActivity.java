@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.widget.TextView;
 
 public class ProcessedActivity extends AppCompatActivity {
@@ -18,6 +19,7 @@ public class ProcessedActivity extends AppCompatActivity {
         if (extras != null) {
             loadMode = extras.getInt("load_mode");
         }
+        Log.d("d", "LOYSING: Load activity " + loadMode);
         TextView processedTextview = findViewById(R.id.processed_textview);
         switch (loadMode) {
             case 1:
@@ -25,6 +27,7 @@ public class ProcessedActivity extends AppCompatActivity {
                 break;
             case 2:
                 processedTextview.setText("PROCESSING\nPAYMENT METHOD\nCOMPLETED");
+                break;
             default: break;
         }
         (new Handler()).postDelayed(this::proceed, 2000);
@@ -33,10 +36,14 @@ public class ProcessedActivity extends AppCompatActivity {
     private void proceed() {
         Intent intent = new Intent();
         switch (loadMode) {
-//            case 1:
-//                intent = new Intent(ProcessedActivity.this, VerifyPaymentActivity.class);
-//                startActivity(intent);
-//                break;
+            case 1:
+                intent = new Intent(ProcessedActivity.this, VerifyPaymentActivity.class);
+                startActivity(intent);
+                break;
+            case 2:
+                intent = new Intent(ProcessedActivity.this, PaymentReport.class);
+                startActivity(intent);
+                break;
             default:
                 intent = new Intent(ProcessedActivity.this, EntryActivity.class);
                 startActivity(intent);

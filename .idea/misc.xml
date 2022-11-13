@@ -14,11 +14,12 @@
         <entry key="..\:/FTI/IF634_IS534_MOBILE/workspaces/lanpu/app/src/main/res/layout/fragment_home.xml" value="0.3333333333333333" />
         <entry key="..\:/FTI/IF634_IS534_MOBILE/workspaces/lanpu/app/src/main/res/menu/bottom_nav_menu.xml" value="0.1796875" />
         <entry key="..\:/UMN/Semester5/IF570_MAP/UAS/lanpu/app/src/main/res/layout/account_aboutus.xml" value="0.24682971014492755" />
+        <entry key="..\:/UMN/Semester5/IF570_MAP/UAS/lanpu/app/src/main/res/layout/account_password.xml" value="0.25" />
         <entry key="..\:/UMN/Semester5/IF570_MAP/UAS/lanpu/app/src/main/res/layout/activity_entry.xml" value="0.21467391304347827" />
         <entry key="..\:/UMN/Semester5/IF570_MAP/UAS/lanpu/app/src/main/res/layout/activity_finding.xml" value="0.24682971014492755" />
         <entry key="..\:/UMN/Semester5/IF570_MAP/UAS/lanpu/app/src/main/res/layout/activity_found.xml" value="0.2359375" />
         <entry key="..\:/UMN/Semester5/IF570_MAP/UAS/lanpu/app/src/main/res/layout/activity_main.xml" value="0.264" />
-        <entry key="..\:/UMN/Semester5/IF570_MAP/UAS/lanpu/app/src/main/res/layout/activity_payment_report.xml" value="0.25" />
+        <entry key="..\:/UMN/Semester5/IF570_MAP/UAS/lanpu/app/src/main/res/layout/activity_payment_report.xml" value="0.2" />
         <entry key="..\:/UMN/Semester5/IF570_MAP/UAS/lanpu/app/src/main/res/layout/activity_processed.xml" value="0.24635416666666668" />
         <entry key="..\:/UMN/Semester5/IF570_MAP/UAS/lanpu/app/src/main/res/layout/activity_processing.xml" value="0.2" />
         <entry key="..\:/UMN/Semester5/IF570_MAP/UAS/lanpu/app/src/main/res/layout/activity_verify_payment.xml" value="0.264" />
@@ -29,6 +30,8 @@
         <entry key="..\:/UMN/Semester5/IF570_MAP/UAS/lanpu/app/src/main/res/layout/fragment_processing.xml" value="0.21403508771929824" />
         <entry key="..\:/UMN/Semester5/IF570_MAP/UAS/lanpu/app/src/main/res/layout/fragment_status.xml" value="0.2" />
         <entry key="..\:/UMN/Semester5/IF570_MAP/UAS/lanpu/app/src/main/res/layout/fragment_ticket.xml" value="0.2" />
+        <entry key="..\:/UMN/Semester5/IF570_MAP/UAS/lanpu/app/src/main/res/layout/history_item.xml" value="0.25" />
+        <entry key="..\:/UMN/Semester5/IF570_MAP/UAS/lanpu/app/src/main/res/layout/signup_screen.xml" value="0.25" />
         <entry key="..\:/UMN/Semester5/IF570_MAP/UAS/lanpu/app/src/main/res/menu/bottom_nav_menu.xml" value="0.25" />
         <entry key="..\:/UMN/Semester5/IF570_MAP/UAS/lanpu/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
         <entry key="..\:/UMN/Semester5/IF570_MAP/UAS/lanpu/app/src/main/res/mipmap-anydpi-v26/placeholder_logo.xml" value="0.1185" />
