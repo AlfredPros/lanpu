@@ -42,24 +42,6 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.KataView
         holder.ticketNumberView.setText(mCurrent[2]);
         holder.priceView.setText(mCurrent[3]);
 
-        /*
-        switch(mCurrent) {
-            case "Video 1": {
-                holder.kataItemView.setText("idk");
-                break;
-            }
-            case "Video 2": {
-                holder.kataItemView.setText("moe");
-                break;
-            }
-            case "Video 3": {
-                holder.kataItemView.setText("le what");
-                break;
-            }
-        }
-        */
-
-        //holder.kataItemView.setText(mCurrent);
     }
 
     @Override

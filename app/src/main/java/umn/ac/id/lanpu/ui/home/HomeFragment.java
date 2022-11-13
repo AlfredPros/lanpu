@@ -43,10 +43,10 @@ public class HomeFragment extends Fragment {
         arr[0] = "24/10/2022 12:30:00"; arr[1] = "24/10/2022 17:30:00"; arr[2] = "ASDFGHJKL12567"; arr[3] = "Rp 2.000,-";
         mHistoryList.add(arr);
 
-        arr[0] = "23/10/2022 12:30:00"; arr[1] = "24/10/2022 17:30:00"; arr[2] = "ASDFGHJKL12567"; arr[3] = "Rp 2.000,-";
+        arr[0] = "21/11/2022 12:00:00"; arr[1] = "21/11/2022 12:30:00"; arr[2] = "MNOPQRSTU34890"; arr[3] = "Rp 5.000,-";
         mHistoryList.add(arr);
 
-        arr[0] = "24/10/2022 12:30:00"; arr[1] = "24/10/2022 17:30:00"; arr[2] = "ASDFGHJKL12567"; arr[3] = "Rp 2.000,-";
+        arr[0] = "20/13/2022 12:40:00"; arr[1] = "20/13/2022 13:30:00"; arr[2] = "VWXYZABCD16358"; arr[3] = "Rp 2.000,-";
         mHistoryList.add(arr);
 
         mHistoryList.add(arr);
