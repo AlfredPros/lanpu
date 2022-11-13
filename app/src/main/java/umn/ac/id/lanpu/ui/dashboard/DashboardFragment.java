@@ -24,8 +24,12 @@ public class DashboardFragment extends Fragment {
         binding = FragmentDashboardBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textDashboard;
-        dashboardViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        final TextView nimTextView = binding.nimTextview;
+        final TextView nameTextView = binding.nameTextview;
+        dashboardViewModel.getNim().observe(getViewLifecycleOwner(), nimTextView::setText);
+        dashboardViewModel.getName().observe(getViewLifecycleOwner(), nameTextView::setText);
+//        dashboardViewModel.getCurrDate().observe(getViewLifecycleOwner(), dateTextView::setText);
+//        dashboardViewModel.getCurrDate().observe(getViewLifecycleOwner(), dateTextView::setText);
         return root;
     }
 
