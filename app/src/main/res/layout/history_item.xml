@@ -30,13 +30,15 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="Entry Time"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textColor="#272727"/>
 
         <TextView
             android:id="@+id/entry_time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="a"/>
+            android:text="a"
+            android:textColor="#272727"/>
 
         <TextView
             android:id="@+id/out_time_label"
@@ -44,13 +46,15 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:text="Out Time"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textColor="#272727"/>
 
         <TextView
             android:id="@+id/out_time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="b" />
+            android:text="b"
+            android:textColor="#272727"/>
 
         <TextView
             android:id="@+id/ticket_number_label"
@@ -58,13 +62,15 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:text="Ticket Number"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textColor="#272727"/>
 
         <TextView
             android:id="@+id/ticket_number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="c" />
+            android:text="c"
+            android:textColor="#272727"/>
 
         <TextView
             android:id="@+id/price_label"
@@ -72,14 +78,16 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:text="Price"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textColor="#272727"/>
 
         <TextView
             android:id="@+id/price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="d"
-            android:layout_marginBottom="16dp"/>
+            android:layout_marginBottom="16dp"
+            android:textColor="#272727"/>
 
     </LinearLayout>
 </LinearLayout>
