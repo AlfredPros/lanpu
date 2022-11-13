@@ -38,19 +38,20 @@ public class HomeFragment extends Fragment {
         //homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 
         // Recycler View
-        String[] arr = new String[4];
+        String[] arr1 = new String[4];
+        arr1[0] = "24/10/2022 12:30:00"; arr1[1] = "24/10/2022 17:30:00"; arr1[2] = "ASDFGHJKL12567"; arr1[3] = "Rp 2.000,-";
+        mHistoryList.add(arr1);
 
-        arr[0] = "24/10/2022 12:30:00"; arr[1] = "24/10/2022 17:30:00"; arr[2] = "ASDFGHJKL12567"; arr[3] = "Rp 2.000,-";
-        mHistoryList.add(arr);
+        String[] arr2 = new String[4];
+        arr2[0] = "21/11/2022 12:00:00"; arr2[1] = "21/11/2022 12:30:00"; arr2[2] = "MNOPQRSTU34890"; arr2[3] = "Rp 5.000,-";
+        mHistoryList.add(arr2);
 
-        arr[0] = "21/11/2022 12:00:00"; arr[1] = "21/11/2022 12:30:00"; arr[2] = "MNOPQRSTU34890"; arr[3] = "Rp 5.000,-";
-        mHistoryList.add(arr);
+        String[] arr3 = new String[4];
+        arr3[0] = "20/13/2022 12:40:00"; arr3[1] = "20/13/2022 13:30:00"; arr3[2] = "VWXYZABCD16358"; arr3[3] = "Rp 2.000,-";
+        mHistoryList.add(arr3);
 
-        arr[0] = "20/13/2022 12:40:00"; arr[1] = "20/13/2022 13:30:00"; arr[2] = "VWXYZABCD16358"; arr[3] = "Rp 2.000,-";
-        mHistoryList.add(arr);
-
-        mHistoryList.add(arr);
-        mHistoryList.add(arr);
+        mHistoryList.add(arr3);
+        mHistoryList.add(arr3);
 
         RecyclerView mRecyclerView = binding.recyclerHistory;
         HistoryAdapter mAdapter = new HistoryAdapter(inflater.getContext(), mHistoryList);

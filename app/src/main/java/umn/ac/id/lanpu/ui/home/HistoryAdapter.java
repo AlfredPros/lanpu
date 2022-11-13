@@ -49,7 +49,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.KataView
         return mDaftarKata.size();
     }
 
-    class KataViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    class KataViewHolder extends RecyclerView.ViewHolder {
         public final TextView entryTimeView;
         public final TextView outTimeView;
         public final TextView ticketNumberView;
@@ -63,10 +63,6 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.KataView
             ticketNumberView = (TextView) itemView.findViewById(R.id.ticket_number);
             priceView = (TextView) itemView.findViewById(R.id.price);
             this.mAdapter = adapter;
-        }
-
-        @Override
-        public void onClick(View v) {
         }
     }
 }
