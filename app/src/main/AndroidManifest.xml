@@ -64,7 +64,13 @@
             android:name=".EntryActivity"
             android:exported="false" />
         <activity
-            android:name=".AboutUs"
+            android:name=".ui.notifications.ChangePassword"
+            android:exported="false" />
+        <activity
+            android:name=".ui.notifications.NotificationSettings"
+            android:exported="false" />
+        <activity
+            android:name=".ui.notifications.AboutUs"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

@@ -15,35 +15,34 @@
         android:layout_height="80dp"
         android:text="About Us"
         android:textSize="50dp"
-        tools:layout_editor_absoluteX="72dp"
-        tools:layout_editor_absoluteY="76dp"
 
+        android:layout_marginTop="96dp"
         android:textAlignment="center"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintVertical_bias="0.1"/>
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:text="Tbh, I don't know what I want to write here but I hope you guys have a nice day! Wish you guys really have a nice day!"
-        tools:layout_editor_absoluteX="73dp"
-        tools:layout_editor_absoluteY="217dp"
-        android:textAlignment="center"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintVertical_bias="0.25"/>
+        app:layout_constraintVertical_bias="0.0"/>
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/about_text_1"
         android:layout_width="match_parent"
-        android:layout_height="71dp"
-        android:text="I was all alone with the love of my life. She's got glitter for skin. My radiant beam in the night. I don't need no light to see you"
-        tools:layout_editor_absoluteX="57dp"
-        tools:layout_editor_absoluteY="321dp"
+        android:layout_height="wrap_content"
+        android:text="Di balik UwU, banyak sekali apa?"
         android:textAlignment="center"
-        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="18dp"
+        android:layout_marginTop="42dp"
+        app:layout_constraintTop_toBottomOf="@id/aboutus_label"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintVertical_bias="0.4"/>
+        app:layout_constraintVertical_bias="0.0"/>
+
+    <TextView
+        android:id="@+id/about_text_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Loysing tidur Loy. Loysing udha tidur nih, Loy. Okeh dia udah tidur. halo halo. karena loysing sudah tidur maka kita tilus aja terus tilus-tilus apa coba tilus. aku diem aja deh."
+        android:textAlignment="center"
+        android:textSize="18dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintTop_toBottomOf="@id/about_text_1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.0"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

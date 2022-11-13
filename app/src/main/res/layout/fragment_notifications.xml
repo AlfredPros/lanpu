@@ -8,115 +8,96 @@
     android:background="@color/yellow">
 
 
-    <ImageView
-        android:id="@+id/imageView"
+    <LinearLayout
+        android:id="@+id/account_header"
         android:layout_width="match_parent"
-        android:layout_height="213dp"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.1"
-        app:srcCompat="@drawable/account_black"
-        tools:layout_editor_absoluteX="57dp" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Login"
-        android:textAlignment="center"
-        android:textColor="#000000"
-        android:textSize="25sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        android:orientation="vertical"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.408" />
-
-    <View
-        android:layout_width="328dp"
-        android:layout_height="3dp"
-        android:layout_span="2"
-        android:layout_weight="1"
-        android:background="#272727"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.45" />
+        app:layout_constraintVertical_bias="0">
 
-    <androidx.appcompat.widget.LinearLayoutCompat
+        <ImageView
+            android:id="@+id/account_icon"
+            android:layout_width="match_parent"
+            android:layout_height="128dp"
+            android:textAlignment="center"
+            app:srcCompat="@drawable/account_black"
+            android:layout_marginTop="36dp"/>
+
+        <TextView
+            android:id="@+id/account_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Adhitya Bagus Wicaksono"
+            android:textAlignment="center"
+            android:textColor="@color/lighter_black"
+            android:textSize="25sp"
+            android:layout_marginTop="12dp"/>
+
+        <View
+            android:id="@+id/account_separator"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_span="2"
+            android:layout_weight="1"
+            android:background="#272727"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
+            android:layout_marginTop="12dp"/>
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:id="@+id/account_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.444"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.624">
+        app:layout_constraintTop_toBottomOf="@id/account_header"
+        app:layout_constraintVertical_bias="0.125">
 
         <TextView
-            android:id="@+id/editTextTextPersonName2"
+            android:id="@+id/account_change_password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
             android:text="Change Password"
-            android:textColor="#000000"
+            android:textColor="@color/lighter_black"
             android:textSize="20sp"
             tools:ignore="TouchTargetSizeCheck"
-            tools:layout_editor_absoluteX="29dp"
-            tools:layout_editor_absoluteY="357dp" />
+            android:layout_marginBottom="8dp" />
 
         <View
             android:layout_width="375dp"
             android:layout_height="3dp"
-            android:layout_marginBottom="7dp"
             android:layout_span="2"
             android:layout_weight="1"
-            android:background="#272727" />
+            android:background="#272727"
+            android:layout_marginBottom="21dp"/>
 
         <TextView
-            android:id="@+id/editTextTextPersonName3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:text="Change Phone Number"
-            android:textColor="#000000"
-            android:textSize="20sp"
-            tools:ignore="TouchTargetSizeCheck"
-            tools:layout_editor_absoluteX="29dp"
-            tools:layout_editor_absoluteY="402dp" />
-
-        <View
-            android:layout_width="375dp"
-            android:layout_height="3dp"
-            android:layout_marginBottom="7dp"
-            android:layout_span="2"
-            android:layout_weight="1"
-            android:background="#272727" />
-
-        <TextView
-            android:id="@+id/editTextTextPersonName4"
+            android:id="@+id/account_notification"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
             android:text="Notification Setting"
-            android:textColor="#000000"
+            android:textColor="@color/lighter_black"
             android:textSize="20sp"
             tools:ignore="TouchTargetSizeCheck"
-            tools:layout_editor_absoluteX="29dp"
-            tools:layout_editor_absoluteY="447dp" />
+            android:layout_marginBottom="8dp" />
 
         <View
             android:layout_width="375dp"
             android:layout_height="3dp"
-            android:layout_marginBottom="7dp"
             android:layout_span="2"
             android:layout_weight="1"
-            android:background="#272727" />
+            android:background="#272727"
+            android:layout_marginBottom="21dp"/>
 
         <TextView
             android:id="@+id/aboutus_button"
@@ -124,35 +105,33 @@
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
             android:text="About Us"
-            android:textColor="#000000"
+            android:textColor="@color/lighter_black"
             android:textSize="20sp"
             tools:ignore="TouchTargetSizeCheck"
-            tools:layout_editor_absoluteX="28dp"
-            tools:layout_editor_absoluteY="492dp" />
+            android:layout_marginBottom="8dp" />
 
         <View
             android:layout_width="375dp"
             android:layout_height="3dp"
-            android:layout_marginBottom="7dp"
             android:layout_span="2"
             android:layout_weight="1"
-            android:background="#272727" />
+            android:background="#272727"
+            android:layout_marginBottom="32dp"/>
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
+    </LinearLayout>
 
     <Button
         android:id="@+id/logout_button"
-        android:layout_width="98dp"
-        android:layout_height="48dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:backgroundTint="@android:color/holo_red_dark"
         android:onClick="signUpInLogin"
         android:text="LOGOUT"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.823" />
+        app:layout_constraintTop_toBottomOf="@id/account_content"
+        app:layout_constraintVertical_bias="0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
