@@ -65,4 +65,15 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.KataView
             this.mAdapter = adapter;
         }
     }
+
+    public void removeAll(int totalSize) {
+        if (totalSize > 0) {
+            for (int i=0; i<totalSize; i++) {
+                int position = 0;
+                mDaftarKata.remove(position);
+                notifyItemRemoved(position);
+                notifyItemRangeChanged(position, mDaftarKata.size());
+            }
+        }
+    }
 }
