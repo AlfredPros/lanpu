@@ -5,127 +5,132 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/yellow">
 
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp"
-        android:gravity="center"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">
-
-        <ImageView
-            android:id="@+id/lanpuLogoBlackLoginSignupScreen"
-            android:layout_width="match_parent"
-            android:layout_height="125dp"
-            android:src="@drawable/lanpu_logo_black"
-            android:layout_marginBottom="16dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@drawable/gui_background_yellow"
-            android:padding="16dp">
-            <TextView
+            android:padding="16dp"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/lanpuLogoBlackLoginSignupScreen"
+                android:layout_width="match_parent"
+                android:layout_height="125dp"
+                android:src="@drawable/lanpu_logo_black"
+                android:layout_marginBottom="16dp"/>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/lighter_black"
+                android:orientation="vertical"
+                android:background="@drawable/gui_background_yellow"
+                android:padding="16dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/lighter_black"
+                    android:textAlignment="center"
+                    android:padding="8dp"
+                    android:textStyle="bold|italic"
+                    android:text="SIGN UP"
+                    android:textSize="20dp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textColor="@color/lighter_black"
+                    android:text="Your Name"/>
+                <EditText
+                    android:id="@+id/nameSignUp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8sp"
+                    android:paddingStart="12sp"
+                    android:textSize="14sp"
+                    android:background="@drawable/gui_button_text_white"
+                    android:hint="John Doe"
+                    android:inputType="text"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/lighter_black"
+                    android:text="E-Mail"/>
+                <EditText
+                    android:id="@+id/emailSignUp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8sp"
+                    android:paddingStart="12sp"
+                    android:textSize="14sp"
+                    android:background="@drawable/gui_button_text_white"
+                    android:hint="john.doe@student.umn.ac.id"
+                    android:inputType="textEmailAddress"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textColor="@color/lighter_black"
+                    android:layout_marginTop="8dp"
+                    android:text="Password"/>
+                <EditText
+                    android:id="@+id/passwordSignUp1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8sp"
+                    android:paddingStart="12sp"
+                    android:textSize="14sp"
+                    android:background="@drawable/gui_button_text_white"
+                    android:hint="********"
+                    android:inputType="textPassword"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textColor="@color/lighter_black"
+                    android:layout_marginTop="8dp"
+                    android:text="Confirm Password"/>
+                <EditText
+                    android:id="@+id/passwordSignUp2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8sp"
+                    android:paddingStart="12sp"
+                    android:textSize="14sp"
+                    android:background="@drawable/gui_button_text_white"
+                    android:hint="********"
+                    android:inputType="textPassword"/>
+                <Button
+                    android:id="@+id/signUpButtonInSignUp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/gui_button_text_black"
+                    android:textColor="@color/white"
+                    android:text="Sign Up" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/loginInSignUp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:textAlignment="center"
-                android:padding="8dp"
-                android:textStyle="bold|italic"
-                android:text="SIGN UP"
-                android:textSize="20dp"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textColor="@color/lighter_black"
-                android:text="Your Name"/>
-            <EditText
-                android:id="@+id/nameSignUp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="8sp"
-                android:paddingStart="12sp"
-                android:textSize="14sp"
-                android:background="@drawable/gui_button_text_white"
-                android:hint="John Doe"
-                android:inputType="text"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:textStyle="bold"
                 android:textColor="@color/lighter_black"
-                android:text="E-Mail"/>
-            <EditText
-                android:id="@+id/emailSignUp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="8sp"
-                android:paddingStart="12sp"
-                android:textSize="14sp"
-                android:background="@drawable/gui_button_text_white"
-                android:hint="john.doe@student.umn.ac.id"
-                android:inputType="textEmailAddress"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textColor="@color/lighter_black"
-                android:layout_marginTop="8dp"
-                android:text="Password"/>
-            <EditText
-                android:id="@+id/passwordSignUp1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="8sp"
-                android:paddingStart="12sp"
-                android:textSize="14sp"
-                android:background="@drawable/gui_button_text_white"
-                android:hint="********"
-                android:inputType="textPassword"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textColor="@color/lighter_black"
-                android:layout_marginTop="8dp"
-                android:text="Confirm Password"/>
-            <EditText
-                android:id="@+id/passwordSignUp2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="8sp"
-                android:paddingStart="12sp"
-                android:textSize="14sp"
-                android:background="@drawable/gui_button_text_white"
-                android:hint="********"
-                android:inputType="textPassword"/>
-            <Button
-                android:id="@+id/signUpButtonInSignUp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="12dp"
-                android:background="@drawable/gui_button_text_black"
-                android:textColor="@color/white"
-                android:text="Sign Up" />
+                android:padding="4dp"
+                android:onClick="loginInSignUp"
+                android:text="Already have an account? Login here"/>
+
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/loginInSignUp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:layout_marginTop="8dp"
-            android:textColor="@color/lighter_black"
-            android:padding="4dp"
-            android:onClick="loginInSignUp"
-            android:text="Already have an account? Login here"/>
-
-    </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
