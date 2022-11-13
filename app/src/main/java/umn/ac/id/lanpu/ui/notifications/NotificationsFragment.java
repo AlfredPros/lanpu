@@ -13,6 +13,8 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import umn.ac.id.lanpu.AboutUs;
+import umn.ac.id.lanpu.LoginActivity;
+import umn.ac.id.lanpu.MainActivity;
 import umn.ac.id.lanpu.databinding.FragmentNotificationsBinding;
 
 public class NotificationsFragment extends Fragment {
@@ -41,7 +43,9 @@ public class NotificationsFragment extends Fragment {
         binding.logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getActivity().getApplicationContext(), LoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
             }
         });
 
