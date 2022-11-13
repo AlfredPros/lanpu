@@ -11,12 +11,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.card.MaterialCardView;
 
 import umn.ac.id.lanpu.ProcessingActivity;
+import umn.ac.id.lanpu.R;
 import umn.ac.id.lanpu.databinding.FragmentDashboardBinding;
 
 public class DashboardFragment extends Fragment {
@@ -82,12 +84,12 @@ public class DashboardFragment extends Fragment {
             }
         }
         TextView durationTextView = binding.durationTextview;
-        MaterialCardView profileCard = binding.profileCard;
+        MaterialCardView statusCard = binding.statusCard;
         dashboardViewModel.getDuration(this.mode).observe(getViewLifecycleOwner(), durationTextView::setText);
         if (mode == 1) {
-            profileCard.setCardBackgroundColor(Color.rgb(0, 255, 0));
+            statusCard.setCardBackgroundColor(getResources().getColor(R.color.green));
         } else {
-            profileCard.setCardBackgroundColor(Color.rgb(255, 0 , 0));
+            statusCard.setCardBackgroundColor(getResources().getColor(R.color.red));
         }
     }
 }

@@ -18,7 +18,7 @@ public class ProcessedActivity extends AppCompatActivity {
         if (extras != null) {
             loadMode = extras.getInt("load_mode");
         }
-        TextView processedTextview = findViewById(R.id.processing_textview);
+        TextView processedTextview = findViewById(R.id.processed_textview);
         switch (loadMode) {
             case 1:
                 processedTextview.setText("FINDING\nPARKING TICKET DATA\nCOMPLETED");

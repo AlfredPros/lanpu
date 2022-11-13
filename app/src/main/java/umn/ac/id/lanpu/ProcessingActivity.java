@@ -24,11 +24,6 @@ public class ProcessingActivity extends AppCompatActivity {
         switch (loadMode) {
             case 1:
                 processingTextview.setText("FINDING\nPARKING TICKET DATA");
-                Intent returnIntent = new Intent();
-                if (loadMode == 0) returnIntent.putExtra("mode", 1);
-                else returnIntent.putExtra("mode", 0);
-                setResult(Activity.RESULT_OK,returnIntent);
-                finish();
                 break;
             case 2:
                 processingTextview.setText("PROCESSING\nPAYMENT METHOD");
