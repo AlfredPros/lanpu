@@ -7,6 +7,7 @@
     android:layout_marginBottom="16sp"
     android:layout_marginLeft="6sp"
     android:layout_marginRight="6sp"
+    android:paddingStart="10sp"
     android:background="@drawable/gui_history_item_nine">
 
     <ImageView
@@ -27,7 +28,7 @@
             android:id="@+id/entry_time_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="16dp"
             android:text="Entry Time"
             android:textStyle="bold" />
 
@@ -78,7 +79,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="d"
-            android:layout_marginBottom="4dp"/>
+            android:layout_marginBottom="16dp"/>
 
     </LinearLayout>
 </LinearLayout>
