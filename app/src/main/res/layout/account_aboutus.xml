@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.home.HomeFragment"
+    android:paddingLeft="32dp"
+    android:paddingRight="32dp"
+    android:background="#FFF500">
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="218dp"
+        android:layout_height="80dp"
+        android:text="About Us"
+        android:textSize="50dp"
+        tools:layout_editor_absoluteX="72dp"
+        tools:layout_editor_absoluteY="76dp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="218dp"
+        android:layout_height="80dp"
+        android:text="Tbh, I don't know what I want to write here but I hope you guys have a nice day! Wish you guys really have a nice day!"
+        tools:layout_editor_absoluteX="73dp"
+        tools:layout_editor_absoluteY="217dp" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="248dp"
+        android:layout_height="71dp"
+        android:text="I was all alone with the love of my life. She's got glitter for skin. My radiant beam in the night. I don't need no light to see you"
+        tools:layout_editor_absoluteX="57dp"
+        tools:layout_editor_absoluteY="321dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

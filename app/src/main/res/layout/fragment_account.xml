@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.home.HomeFragment"
+    android:paddingLeft="32dp"
+    android:paddingRight="32dp"
+    android:background="#FFF500">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="240dp"
+        android:layout_height="213dp"
+        app:srcCompat="@drawable/account_black"
+        tools:layout_editor_absoluteX="57dp"
+        tools:layout_editor_absoluteY="56dp" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="69dp"
+        android:layout_height="30dp"
+        android:text="Login"
+        android:textSize="25dp"
+        tools:layout_editor_absoluteX="145dp"
+        tools:layout_editor_absoluteY="292dp" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonName2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="15"
+        android:inputType="textPersonName"
+        android:text="Change Password"
+        tools:layout_editor_absoluteX="29dp"
+        tools:layout_editor_absoluteY="357dp" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonName3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="15"
+        android:inputType="textPersonName"
+        android:text="Change Phone Number"
+        tools:layout_editor_absoluteX="29dp"
+        tools:layout_editor_absoluteY="402dp" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonName4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="15"
+        android:inputType="textPersonName"
+        android:text="Notification Setting"
+        tools:layout_editor_absoluteX="29dp"
+        tools:layout_editor_absoluteY="447dp" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonName5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="15"
+        android:inputType="textPersonName"
+        android:text="About Us"
+        tools:layout_editor_absoluteX="28dp"
+        tools:layout_editor_absoluteY="492dp" />
+
+    <Button
+        android:id="@+id/loginButtoninLogin2"
+        android:layout_width="98dp"
+        android:layout_height="44dp"
+        android:layout_gravity="center_horizontal"
+        android:backgroundTint="@android:color/holo_red_dark"
+        android:onClick="signUpInLogin"
+        android:text="LOGOUT"
+        app:circularflow_angles="1000dp"
+        app:circularflow_defaultRadius="1000dp"
+        app:circularflow_radiusInDP="1000dp"
+        app:circularflow_viewCenter="1000dp"
+        tools:layout_editor_absoluteX="124dp"
+        tools:layout_editor_absoluteY="570dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
