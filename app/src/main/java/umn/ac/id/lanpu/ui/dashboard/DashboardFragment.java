@@ -44,6 +44,7 @@ public class DashboardFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), ProcessingActivity.class);
+                intent.putExtra("load_mode", 0);
                 startActivityForResult(intent, 1);
             }
         });
