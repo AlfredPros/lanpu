@@ -1,6 +1,7 @@
 package umn.ac.id.lanpu.ui.home;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -58,6 +59,20 @@ public class HomeFragment extends Fragment {
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(inflater.getContext()));
 
+        binding.historyFilterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Filter
+            }
+        });
+
+        binding.historyResetButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Remove all
+                mAdapter.removeAll(mHistoryList.size());
+            }
+        });
 
         return root;
     }
