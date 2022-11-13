@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="@color/white"
+        android:background="@drawable/gui_background_white"
         android:padding="16dp">
         <TextView
             android:layout_width="match_parent"
@@ -25,7 +25,7 @@
             android:textColor="@color/lighter_black"
             android:textAlignment="center"
             android:padding="8dp"
-            android:textStyle="bold"
+            android:textStyle="bold|italic"
             android:text="LOGIN"
             android:textSize="20dp"/>
         <TextView
@@ -38,7 +38,10 @@
             android:id="@+id/emailLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/lighter_black"
+            android:padding="8sp"
+            android:paddingStart="12sp"
+            android:textSize="14sp"
+            android:background="@drawable/gui_button_text_white"
             android:hint="john.doe@student.umn.ac.id"
             android:inputType="textEmailAddress"/>
         <TextView
@@ -46,13 +49,16 @@
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:textColor="@color/lighter_black"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="8dp"
             android:text="Password"/>
         <EditText
             android:id="@+id/passwordLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/lighter_black"
+            android:padding="8sp"
+            android:paddingStart="12sp"
+            android:textSize="14sp"
+            android:background="@drawable/gui_button_text_white"
             android:hint="********"
             android:inputType="textPassword"/>
         <Button
@@ -61,8 +67,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="8dp"
-            android:text="Login"
-            android:backgroundTint="@color/lighter_black"/>
+            android:background="@drawable/gui_button_text_black"
+            android:textColor="@color/white"
+            android:text="Login" />
     </LinearLayout>
     <TextView
         android:id="@+id/signUpInLogin"
@@ -70,8 +77,6 @@
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:layout_marginTop="8dp"
-        android:background="@color/lighter_black"
-        android:textColor="@color/white"
         android:padding="4dp"
         android:onClick="signUpInLogin"
         android:text="Don't have an account? Sign Up here"/>
