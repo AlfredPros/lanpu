@@ -12,6 +12,7 @@ public class DashboardViewModel extends ViewModel {
 
     private final MutableLiveData<String> name, nim;
     private final MutableLiveData<Integer> balance;
+    private final MutableLiveData<String> duration;
 //    private final MutableLiveData<String> currDate;
 
     public DashboardViewModel() {
@@ -19,8 +20,10 @@ public class DashboardViewModel extends ViewModel {
 //        mText.setValue("This is home fragment");
         name = new MutableLiveData<>();
         nim = new MutableLiveData<>();
+        duration = new MutableLiveData<>();
         name.setValue("Adhitya Bagus Wicaksono");
         nim.setValue("00000048211");
+        duration.setValue("05 HOURS 00 MINUTE 00 SECONDS");
         balance = new MutableLiveData<>();
         balance.setValue(100000);
     }
@@ -35,6 +38,15 @@ public class DashboardViewModel extends ViewModel {
 
     public LiveData<Integer> getBalance() {
         return balance;
+    }
+
+    public LiveData<String> getDuration(int mode) {
+        if (mode == 1) {
+            duration.setValue("05 HOURS 00 MINUTE 00 SECONDS");
+        } else {
+            duration.setValue("");
+        }
+        return duration;
     }
 
 //    public LiveData<String> getCurrDate() {

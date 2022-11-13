@@ -25,7 +25,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingVertical="40dp">
+            android:paddingVertical="30dp">
 
             <ImageView
                 android:id="@+id/placeholder_logo"
@@ -40,6 +40,7 @@
                 app:layout_constraintVertical_bias="0.5" />
 
             <LinearLayout
+                android:id="@+id/profile_detail_group"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -69,6 +70,19 @@
                     android:text="12:30:00 GMT +7"
                     android:textSize="16sp"
                     android:textColor="@color/white"/>
+
+                <View
+                    android:layout_marginVertical="3dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/white" />
+                <TextView
+                    android:id="@+id/duration_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    />
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
@@ -156,7 +170,7 @@
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:textColor="@color/black"
-
+                android:clickable="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageView"/>

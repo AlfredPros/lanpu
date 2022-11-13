@@ -6,14 +6,14 @@ import androidx.appcompat.widget.AppCompatButton;
 import android.os.Bundle;
 import android.view.View;
 
-public class EntryActivity extends AppCompatActivity {
+public class VerifyPaymentActivity extends AppCompatActivity {
 
     private AppCompatButton homeButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_entry);
+        setContentView(R.layout.activity_verify_payment);
         homeButton = findViewById(R.id.home_page_button);
         homeButton.setOnClickListener(new View.OnClickListener() {
             @Override
