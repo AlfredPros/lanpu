@@ -18,13 +18,13 @@
             android:src="@drawable/lanpu_logo_black"
             android:layout_marginBottom="16dp"/>
         <Button
-            android:id="@+id/loginButton1"
+            android:id="@+id/loginButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Login"
             android:backgroundTint="@color/lighter_black" />
         <Button
-            android:id="@+id/signUpButton1"
+            android:id="@+id/signUpButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Sign Up"

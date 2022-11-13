@@ -56,6 +56,7 @@
             android:hint="********"
             android:inputType="textPassword"/>
         <Button
+            android:id="@+id/loginButtoninLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -72,6 +73,7 @@
         android:background="@color/lighter_black"
         android:textColor="@color/white"
         android:padding="4dp"
+        android:onClick="signUpInLogin"
         android:text="Don't have an account? Sign Up here"/>
 
 </LinearLayout>
