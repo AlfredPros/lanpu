@@ -119,7 +119,7 @@ public class SignUpActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         User user = new User(name, email, "0");
                         Log.e("PROCESS", "Running");
-                        FirebaseDatabase.getInstance().getReferenceFromUrl("https://if570-mobileappuas-lanpu-default-rtdb.firebaseio.com")
+                        FirebaseDatabase.getInstance().getReference("Users")
                                 .child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid())
                                 .setValue(user).addOnCompleteListener(task1 -> {
                                     if (task1.isSuccessful()) {
