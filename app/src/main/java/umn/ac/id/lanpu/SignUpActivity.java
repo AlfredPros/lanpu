@@ -2,6 +2,7 @@ package umn.ac.id.lanpu;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -117,19 +118,22 @@ public class SignUpActivity extends AppCompatActivity {
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         User user = new User(name, email, "0");
-                        FirebaseDatabase.getInstance().getReference("https://if570-mobileappuas-lanpu-default-rtdb.asia-southeast1.firebasedatabase.app/")
+                        Log.e("PROCESS", "Running");
+                        FirebaseDatabase.getInstance().getReferenceFromUrl("https://if570-mobileappuas-lanpu-default-rtdb.firebaseio.com")
                                 .child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid())
                                 .setValue(user).addOnCompleteListener(task1 -> {
                                     if (task1.isSuccessful()) {
                                         Toast.makeText(SignUpActivity.this, "User has been registered succesfully", Toast.LENGTH_LONG).show();
 //                                                Redirect kembali ke Login
                                     } else {
-                                        Toast.makeText(SignUpActivity.this, "Failed to Registered! Try Again!", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(SignUpActivity.this, "Failed to Registered 1! Try Again!", Toast.LENGTH_LONG).show();
                                     }
                                 });
+                        Log.e("PROCESS", "Ran 1");
                     } else {
-                        Toast.makeText(SignUpActivity.this, "Failed to Registered! Try Again!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(SignUpActivity.this, "Failed to Registered 2! Try Again!", Toast.LENGTH_LONG).show();
                     }
+                    Log.e("PROCESS", "Ran 2");
                 });
     }
 
