@@ -124,6 +124,7 @@ public class SignUpActivity extends AppCompatActivity {
                                 .setValue(user).addOnCompleteListener(task1 -> {
                                     if (task1.isSuccessful()) {
                                         Toast.makeText(SignUpActivity.this, "User has been registered succesfully", Toast.LENGTH_LONG).show();
+                                        Log.e("PROCESS", "Success");
 //                                                Redirect kembali ke Login
                                     } else {
                                         Toast.makeText(SignUpActivity.this, "Failed to Registered 1! Try Again!", Toast.LENGTH_LONG).show();
