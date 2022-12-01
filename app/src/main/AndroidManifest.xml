@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="umn.ac.id.lanpu">
-
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -12,6 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Lanpu"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
             android:name=".SplashActivity"
@@ -49,19 +49,10 @@
                 android:value="umn.ac.id.lanpu.LoginSignUpActivity"/>
         </activity>
         <activity
-            android:name=".PaymentReport"
-            android:exported="false" />
-        <activity
-            android:name=".VerifyPaymentActivity"
-            android:exported="false" />
-        <activity
             android:name=".ProcessedActivity"
             android:exported="false" />
         <activity
             android:name=".ProcessingActivity"
-            android:exported="false" />
-        <activity
-            android:name=".EntryActivity"
             android:exported="false" />
         <activity
             android:name=".AboutUs"
@@ -76,5 +67,5 @@
 <!--            </intent-filter>-->
         </activity>
     </application>
-
+<uses-permission android:name="android.permission.INTERNET"/>
 </manifest>

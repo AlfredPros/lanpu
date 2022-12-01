@@ -37,16 +37,16 @@ public class ProcessedActivity extends AppCompatActivity {
         Intent intent = new Intent();
         switch (loadMode) {
             case 1:
-                intent = new Intent(ProcessedActivity.this, VerifyPaymentActivity.class);
-                startActivity(intent);
+//                intent = new Intent(ProcessedActivity.this, VerifyPaymentActivity.class);
+//                startActivity(intent);
                 break;
             case 2:
-                intent = new Intent(ProcessedActivity.this, PaymentReport.class);
-                startActivity(intent);
+//                intent = new Intent(ProcessedActivity.this, PaymentReport.class);
+//                startActivity(intent);
                 break;
             default:
-                intent = new Intent(ProcessedActivity.this, EntryActivity.class);
-                startActivity(intent);
+//                intent = new Intent(ProcessedActivity.this, EntryActivity.class);
+//                startActivity(intent);
                 break;
         }
         finish();
