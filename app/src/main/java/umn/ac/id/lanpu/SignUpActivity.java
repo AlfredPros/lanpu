@@ -2,11 +2,11 @@ package umn.ac.id.lanpu;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -21,6 +21,7 @@ import java.util.Objects;
 public class SignUpActivity extends AppCompatActivity {
     private Button signUpButtonInSignUp;
     private EditText nameSignUp, emailSignUp, passwordSignUp1, passwordSignUp2;
+    private ProgressBar progressBar;
     private FirebaseAuth mAuth;
 
     @Override
@@ -35,6 +36,7 @@ public class SignUpActivity extends AppCompatActivity {
         emailSignUp = findViewById(R.id.emailSignUp);
         passwordSignUp1 = findViewById(R.id.passwordSignUp1);
         passwordSignUp2 = findViewById(R.id.passwordSignUp2);
+        progressBar = findViewById(R.id.signUpProgressBar);
 
 
         signUpButtonInSignUp = findViewById(R.id.signUpButtonInSignUp);
@@ -63,6 +65,8 @@ public class SignUpActivity extends AppCompatActivity {
         String email = emailSignUp.getText().toString().trim();
         String password1 = passwordSignUp1.getText().toString().trim();
         String password2 = passwordSignUp2.getText().toString().trim();
+
+        progressBar.setVisibility(View.VISIBLE);
 
         //    Validasi Input
         if (name.isEmpty()) {
@@ -117,24 +121,23 @@ public class SignUpActivity extends AppCompatActivity {
         mAuth.createUserWithEmailAndPassword(email, password1)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        User user = new User(name, email, "0");
-                        Log.e("PROCESS", "Running");
+                        User user = new User(name, email, 0);
                         FirebaseDatabase.getInstance().getReference("Users")
                                 .child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid())
                                 .setValue(user).addOnCompleteListener(task1 -> {
                                     if (task1.isSuccessful()) {
                                         Toast.makeText(SignUpActivity.this, "User has been registered succesfully", Toast.LENGTH_LONG).show();
-                                        Log.e("PROCESS", "Success");
+                                        progressBar.setVisibility(View.GONE);
 //                                                Redirect kembali ke Login
                                     } else {
-                                        Toast.makeText(SignUpActivity.this, "Failed to Registered 1! Try Again!", Toast.LENGTH_LONG).show();
+                                        progressBar.setVisibility(View.GONE);
+                                        Toast.makeText(SignUpActivity.this, "Failed to Registered! Try Again!", Toast.LENGTH_LONG).show();
                                     }
                                 });
-                        Log.e("PROCESS", "Ran 1");
                     } else {
-                        Toast.makeText(SignUpActivity.this, "Failed to Registered 2! Try Again!", Toast.LENGTH_LONG).show();
+                        progressBar.setVisibility(View.GONE);
+                        Toast.makeText(SignUpActivity.this, "Failed to Registered! Try Again!", Toast.LENGTH_LONG).show();
                     }
-                    Log.e("PROCESS", "Ran 2");
                 });
     }
 
