@@ -126,9 +126,11 @@ public class SignUpActivity extends AppCompatActivity {
                                 .child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid())
                                 .setValue(user).addOnCompleteListener(task1 -> {
                                     if (task1.isSuccessful()) {
-                                        Toast.makeText(SignUpActivity.this, "User has been registered succesfully", Toast.LENGTH_LONG).show();
+                                        mAuth.getCurrentUser().sendEmailVerification();
+                                        Toast.makeText(SignUpActivity.this, "Please Check email for verification.", Toast.LENGTH_LONG).show();
                                         progressBar.setVisibility(View.GONE);
 //                                                Redirect kembali ke Login
+                                        finish();
                                     } else {
                                         progressBar.setVisibility(View.GONE);
                                         Toast.makeText(SignUpActivity.this, "Failed to Registered! Try Again!", Toast.LENGTH_LONG).show();
