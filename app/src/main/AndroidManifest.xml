@@ -3,6 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="umn.ac.id.lanpu">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -12,6 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Lanpu"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
             android:name=".SplashActivity"
@@ -33,27 +37,21 @@
         <activity
             android:name=".LoginActivity"
             android:exported="true"
-            tools:ignore="DuplicateActivity"
-            android:parentActivityName=".LoginSignUpActivity">
+            android:parentActivityName=".LoginSignUpActivity"
+            tools:ignore="DuplicateActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="umn.ac.id.lanpu.LoginSignUpActivity"/>
+                android:value="umn.ac.id.lanpu.LoginSignUpActivity" />
         </activity>
         <activity
             android:name=".SignUpActivity"
             android:exported="true"
-            tools:ignore="DuplicateActivity"
-            android:parentActivityName=".LoginSignUpActivity">
+            android:parentActivityName=".LoginSignUpActivity"
+            tools:ignore="DuplicateActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="umn.ac.id.lanpu.LoginSignUpActivity"/>
+                android:value="umn.ac.id.lanpu.LoginSignUpActivity" />
         </activity>
-        <activity
-            android:name=".PaymentReport"
-            android:exported="false" />
-        <activity
-            android:name=".VerifyPaymentActivity"
-            android:exported="false" />
         <activity
             android:name=".ProcessedActivity"
             android:exported="false" />
@@ -76,10 +74,10 @@
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
+            <!--            <intent-filter>-->
+            <!--                <action android:name="android.intent.action.MAIN" />-->
+            <!--                <category android:name="android.intent.category.LAUNCHER" />-->
+            <!--            </intent-filter>-->
         </activity>
     </application>
 
