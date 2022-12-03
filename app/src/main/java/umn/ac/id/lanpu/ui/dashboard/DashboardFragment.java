@@ -13,9 +13,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.card.MaterialCardView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
 
 import umn.ac.id.lanpu.ProcessingActivity;
 import umn.ac.id.lanpu.R;
@@ -40,27 +44,48 @@ public class DashboardFragment extends Fragment {
         final TextView nameTextView = binding.nameTextview;
         final ImageView qrImageView = binding.imageView;
         final TextView durationTextView = binding.durationTextview;
-        qrImageView.setOnClickListener(new View.OnClickListener() {
+        final TextView balanceTextView = binding.balanceTextview;
+//        qrImageView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(getActivity(), ProcessingActivity.class);
+//                intent.putExtra("load_mode", 0);
+//                startActivityForResult(intent, 1);
+//            }
+//        });
+//
+//        nimTextView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(getActivity(), ProcessingActivity.class);
+//                intent.putExtra("load_mode", 1);
+//                startActivityForResult(intent, 1);
+//            }
+//        });
+
+        LiveData<DataSnapshot> liveData = dashboardViewModel.getDataSnapshotLiveData();
+        liveData.observe(getViewLifecycleOwner(), new Observer<DataSnapshot>() {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), ProcessingActivity.class);
-                intent.putExtra("load_mode", 0);
-                startActivityForResult(intent, 1);
+            public void onChanged(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot != null) {
+//                    Updata UI ketika terjadi perubahan dalam User
+
+//                    Get data
+                    String name = dataSnapshot.child("name").getValue(String.class);
+//                    String uid = dataSnapshot.getValue(String.class);
+                    int balance  = dataSnapshot.child("balance").getValue(int.class);
+
+//                    Set data to View
+                    nameTextView.setText(name);
+                    nimTextView.setText(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                    balanceTextView.setText(("Rp " + balance));
+                }
             }
         });
 
-        nimTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), ProcessingActivity.class);
-                intent.putExtra("load_mode", 1);
-                startActivityForResult(intent, 1);
-            }
-        });
-
-        dashboardViewModel.getNim().observe(getViewLifecycleOwner(), nimTextView::setText);
-        dashboardViewModel.getName().observe(getViewLifecycleOwner(), nameTextView::setText);
-        dashboardViewModel.getDuration(this.mode).observe(getViewLifecycleOwner(), durationTextView::setText);
+//        dashboardViewModel.getNim().observe(getViewLifecycleOwner(), nimTextView::setText);
+//        dashboardViewModel.getName().observe(getViewLifecycleOwner(), nameTextView::setText);
+//        dashboardViewModel.getDuration(this.mode).observe(getViewLifecycleOwner(), durationTextView::setText);
 //        final ImageView qrImageView = binding.imageView;
 
         return root;
