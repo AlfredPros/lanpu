@@ -1,8 +1,12 @@
 package umn.ac.id.lanpu;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -15,6 +19,7 @@ import umn.ac.id.lanpu.databinding.ActivityMainBinding;
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
+    private FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +44,16 @@ public class MainActivity extends AppCompatActivity {
         super.onTitleChanged(title, color);
         if (title.equals("Home")) {
             this.getActionBar().hide();
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user == null) {
+            Toast.makeText(this, "Please Login First.", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(MainActivity.this, LoginActivity.class));
         }
     }
 }
