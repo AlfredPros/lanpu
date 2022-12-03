@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -13,7 +14,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-import umn.ac.id.lanpu.AboutUs;
+import umn.ac.id.lanpu.ui.notifications.AboutUs;
 import umn.ac.id.lanpu.LoginActivity;
 import umn.ac.id.lanpu.databinding.FragmentNotificationsBinding;
 
