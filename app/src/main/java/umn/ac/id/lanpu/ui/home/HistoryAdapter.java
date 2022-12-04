@@ -120,11 +120,8 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.KataView
                 else {
                     position++;
                 }
-
             }
         }
-
-
     }
 
     public void addItem(String[] arr) {
