@@ -88,9 +88,6 @@ public class DashboardFragment extends Fragment {
             @Override
             public void onChanged(@NonNull DataSnapshot dataSnapshot) {
 
-                dateText.setText(strDate);
-                timeText.setText(strTime);
-
                 if (dataSnapshot != null) {
 //                    Updata UI ketika terjadi perubahan dalam User
 
