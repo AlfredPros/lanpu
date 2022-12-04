@@ -24,6 +24,8 @@ public class ProcessingActivity extends AppCompatActivity {
 
     private  int loadMode = 0;
     private TicketViewModel ticketViewModel;
+    private final int LOAD_ENTRY = 0;
+    private final int LOAD_PAYMENT = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +35,7 @@ public class ProcessingActivity extends AppCompatActivity {
         String title = null;
         if (extras != null) {
             loadMode = extras.getInt("loadMode");
-            title = extras.getString("processing_title");
+            title = extras.getString("processingTitle");
         }
         TextView processingTextview = findViewById(R.id.processing_textview);
         Intent intent = getIntent();
@@ -51,9 +53,14 @@ public class ProcessingActivity extends AppCompatActivity {
                 else {
                     Log.d("firebase", String.valueOf(task.getResult().getValue()));
                     // Jika user baru di checked in maka tampilkan ticket masuk
-                    Intent enterIntent = new Intent(ProcessingActivity.this, EntryActivity.class);
-                    enterIntent.putExtra("ticketID", task.getResult().getValue(String.class));
-                    startActivity(enterIntent);
+                    Intent showTicket = new Intent();
+                    if (loadMode == LOAD_ENTRY) {
+                         showTicket = new Intent(ProcessingActivity.this, EntryActivity.class);
+                    } else if (loadMode == LOAD_PAYMENT) {
+                        showTicket = new Intent(ProcessingActivity.this, VerifyPayment.class);
+                    }
+                    showTicket.putExtra("ticketID", task.getResult().getValue(String.class));
+                    startActivity(showTicket);
                     finish();
                 }
             }

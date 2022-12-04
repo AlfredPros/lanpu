@@ -4,19 +4,169 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".VerifyPaymentActivity"
+    tools:context=".VerifyPayment"
     android:padding="30dp"
     android:background="@color/yellow">
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/entry_detail"
-        android:name="umn.ac.id.lanpu.ui.dashboard.TicketFragment"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/ticket_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout="@layout/fragment_ticket" />
+        app:strokeColor="@color/black"
+        app:strokeWidth="3dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingHorizontal="24dp"
+            android:paddingVertical="24dp">
+
+            <TextView
+                android:id="@+id/ticket_title_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="50dp"
+                android:text="PARKING TICKET DETAIL"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold|italic"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:id="@+id/details_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="24dp"
+                android:orientation="vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ticket_title_textview">
+
+                <LinearLayout
+                    android:id="@+id/ticket_number_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/ticket_number_label"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="TICKET NUMBER"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/ticket_number_data"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="ASDFGHJKL1234567"
+                        android:textColor="@color/lighter_black" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ticket_name_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/ticket_name_label"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="NAME"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/ticket_name_data"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="ADHITYA BAGUS WICAKSONO"
+                        android:textColor="@color/lighter_black" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ticket_nim_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/ticket_nim_label"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="TICKET ID NUMBER"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/ticket_nim_data"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="00000048211"
+                        android:textColor="@color/lighter_black" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ticket_time_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/ticket_time_label"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="ENTRY TIME"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/ticket_time_data"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="24/10/2022 12:30:00"
+                        android:textColor="@color/lighter_black" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ticket_category_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/ticket_category_label"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="CATEGORY"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/ticket_category_data"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="MOTORCYCLE"
+                        android:textColor="@color/lighter_black" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/parking_detail"
@@ -24,7 +174,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/entry_detail"
+        app:layout_constraintTop_toBottomOf="@+id/ticket_card"
         android:layout_marginTop="5dp"
         app:strokeColor="@color/lighter_black"
         app:strokeWidth="3dp"
@@ -47,7 +197,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/duration_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -63,11 +213,11 @@
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginTop="5dp"
                 android:textStyle="bold|italic"
-                app:layout_constraintTop_toBottomOf="@+id/textView4"
+                app:layout_constraintTop_toBottomOf="@+id/duration_textview"
                 android:text="PARKING PRICE" />
 
             <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/price_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -88,7 +238,7 @@
         app:layout_constraintTop_toBottomOf="@+id/parking_detail"
         app:cardElevation="15dp">
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/home_page_button"
+            android:id="@+id/pay_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="PAY NOW"

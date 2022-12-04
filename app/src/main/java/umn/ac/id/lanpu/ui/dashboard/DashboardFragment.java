@@ -176,32 +176,30 @@ public class DashboardFragment extends Fragment {
             }
         };
         if (checkedIn) {
-            statusCard.setCardBackgroundColor(getResources().getColor(R.color.green));
-            dashboardViewModel.getDurationLiveDate().observe(getViewLifecycleOwner(), changeDuration);
-            if (checkedIn != checker) {
-                viewEntryTicket();
+            if (checkedIn != checker) { // Fire ketika hanya berubah
+                viewTicketDetail(LOAD_ENTRY);
                 checker = checkedIn;
+                statusCard.setCardBackgroundColor(getResources().getColor(R.color.green));
+                dashboardViewModel.getDurationLiveDate().observe(getViewLifecycleOwner(), changeDuration);
             }
         } else {
-            statusCard.setCardBackgroundColor(getResources().getColor(R.color.red));
-            dashboardViewModel.getDurationLiveDate().removeObserver(changeDuration);
-            checker = checkedIn;
-
+            if (checkedIn != checker) {
+                viewTicketDetail(LOAD_PAYMENT);
+                statusCard.setCardBackgroundColor(getResources().getColor(R.color.red));
+                dashboardViewModel.getDurationLiveDate().removeObserver(changeDuration);
+                checker = checkedIn;
 //            Masukkan Durasi jika tidak bisa
-            durationTextView.setText("");
+                durationTextView.setText("");
+            }
         }
     }
 
 
-    public void viewEntryTicket(){
+    public void viewTicketDetail(int loadMode){
         Intent getTicket = new Intent(getActivity(), ProcessingActivity.class);
-        getTicket.putExtra("processing_title", "Finding Ticket");
+        getTicket.putExtra("processingTitle", "Finding Ticket");
+        getTicket.putExtra("loadMode", loadMode);
         startActivity(getTicket);
     }
 
-    public void viewPaymentTicket() {
-        Intent getTicket = new Intent(getActivity(), ProcessingActivity.class);
-        getTicket.putExtra("processing_title", "Finding Ticket");
-        startActivity(getTicket);
-    }
 }
