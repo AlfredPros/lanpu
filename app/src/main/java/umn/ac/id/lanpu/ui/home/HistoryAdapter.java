@@ -88,4 +88,9 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.KataView
             }
         }
     }
+
+    public void addItem(String[] arr) {
+        mDaftarKata.add(arr);
+        notifyItemRangeChanged(mDaftarKata.size(), mDaftarKata.size());
+    }
 }
