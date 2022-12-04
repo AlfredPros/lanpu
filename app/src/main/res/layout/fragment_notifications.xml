@@ -80,6 +80,7 @@
             android:background="#272727"
             android:layout_marginBottom="21dp"/>
 
+        <!--
         <TextView
             android:id="@+id/account_notification"
             android:layout_width="wrap_content"
@@ -98,6 +99,7 @@
             android:layout_weight="1"
             android:background="#272727"
             android:layout_marginBottom="21dp"/>
+        -->
 
         <TextView
             android:id="@+id/aboutus_button"
