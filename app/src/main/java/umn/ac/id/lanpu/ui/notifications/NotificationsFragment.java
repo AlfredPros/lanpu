@@ -59,6 +59,8 @@ public class NotificationsFragment extends Fragment {
             }
         });
 
+        /*
+        // Unused
         binding.accountNotification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,6 +68,7 @@ public class NotificationsFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        */
 
         binding.aboutusButton.setOnClickListener(new View.OnClickListener() {
             @Override
