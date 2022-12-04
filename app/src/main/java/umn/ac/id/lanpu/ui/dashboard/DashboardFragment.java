@@ -12,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
@@ -26,7 +25,6 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 
-import umn.ac.id.lanpu.ProcessingActivity;
 import umn.ac.id.lanpu.R;
 import umn.ac.id.lanpu.databinding.FragmentDashboardBinding;
 
@@ -50,23 +48,7 @@ public class DashboardFragment extends Fragment {
         final ImageView qrImageView = binding.imageView;
         final TextView durationTextView = binding.durationTextview;
         final TextView balanceTextView = binding.balanceTextview;
-//        qrImageView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(getActivity(), ProcessingActivity.class);
-//                intent.putExtra("load_mode", 0);
-//                startActivityForResult(intent, 1);
-//            }
-//        });
-//
-//        nimTextView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(getActivity(), ProcessingActivity.class);
-//                intent.putExtra("load_mode", 1);
-//                startActivityForResult(intent, 1);
-//            }
-//        });
+
 
         LiveData<DataSnapshot> liveData = dashboardViewModel.getDataSnapshotLiveData();
         liveData.observe(getViewLifecycleOwner(), new Observer<DataSnapshot>() {
@@ -78,7 +60,7 @@ public class DashboardFragment extends Fragment {
 //                    Get data
                     String name = dataSnapshot.child("name").getValue(String.class);
 //                    String uid = dataSnapshot.getValue(String.class);
-                    int balance  = dataSnapshot.child("balance").getValue(int.class);
+                    int balance = dataSnapshot.child("balance").getValue(int.class);
 
 //                    Set data to View
                     nameTextView.setText(name);
@@ -107,11 +89,14 @@ public class DashboardFragment extends Fragment {
             }
         });
 
-//        dashboardViewModel.getNim().observe(getViewLifecycleOwner(), nimTextView::setText);
-//        dashboardViewModel.getName().observe(getViewLifecycleOwner(), nameTextView::setText);
-//        dashboardViewModel.getDuration(this.mode).observe(getViewLifecycleOwner(), durationTextView::setText);
-//        final ImageView qrImageView = binding.imageView;
-
+        LiveData<DataSnapshot> statusLiveData = dashboardViewModel.getStatusLiveData();
+        statusLiveData.observe(getViewLifecycleOwner(), new Observer<DataSnapshot>() {
+            @Override
+            public void onChanged(@NonNull DataSnapshot dataSnapshot) {
+                boolean checkedIn = dataSnapshot.getValue(boolean.class);
+                changeStatus(checkedIn);
+            }
+        });
         return root;
     }
 
@@ -126,8 +111,8 @@ public class DashboardFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == 1) {
-            if(resultCode == Activity.RESULT_OK){
-                mode =data.getIntExtra("mode", 1);
+            if (resultCode == Activity.RESULT_OK) {
+                mode = data.getIntExtra("mode", 1);
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 mode = 0;
@@ -149,16 +134,19 @@ public class DashboardFragment extends Fragment {
         Observer<Long> changeDuration = new Observer<Long>() {
             @Override
             public void onChanged(Long aLong) {
-                durationTextView.setText(aLong.intValue());
+                // Handle duration TextView ketika data Duration berubah
+                durationTextView.setText(aLong.toString());
             }
         };
         if (checkedIn) {
-
             statusCard.setCardBackgroundColor(getResources().getColor(R.color.green));
             dashboardViewModel.getDurationLiveDate().observe(getViewLifecycleOwner(), changeDuration);
         } else {
             statusCard.setCardBackgroundColor(getResources().getColor(R.color.red));
             dashboardViewModel.getDurationLiveDate().removeObserver(changeDuration);
+
+//            Masukkan Durasi jika tidak bisa
+            durationTextView.setText("");
         }
     }
 }
