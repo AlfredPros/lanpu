@@ -5,11 +5,14 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -25,6 +28,9 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import umn.ac.id.lanpu.R;
 import umn.ac.id.lanpu.databinding.FragmentDashboardBinding;
 
@@ -33,6 +39,11 @@ public class DashboardFragment extends Fragment {
     private FragmentDashboardBinding binding;
     private int mode = 0;
     DashboardViewModel dashboardViewModel;
+
+    private final Handler mHandler = new Handler();
+    public Calendar c;
+    public String strDate;
+    public String strTime;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -49,11 +60,37 @@ public class DashboardFragment extends Fragment {
         final TextView durationTextView = binding.durationTextview;
         final TextView balanceTextView = binding.balanceTextview;
 
+        // Set Date Time
+        final TextView dateText = binding.dateTextview;
+        final TextView timeText = binding.timeTextview;
 
+        // This function refreshes every second
+        final Runnable mRunnable = new Runnable() {
+            public void run() {
+                c = Calendar.getInstance();
+                SimpleDateFormat sdf = new SimpleDateFormat("EEEE, MMMM d, yyyy");
+                strDate = sdf.format(c.getTime());
+                dateText.setText(strDate);
+
+                sdf = new SimpleDateFormat("HH:mm:ss ZZZZ");
+                strTime = sdf.format(c.getTime());
+                timeText.setText(strTime);
+
+                mHandler.postDelayed(this, 1000);
+            }
+        };
+
+        mHandler.post(mRunnable);
+
+        // Live Data
         LiveData<DataSnapshot> liveData = dashboardViewModel.getDataSnapshotLiveData();
         liveData.observe(getViewLifecycleOwner(), new Observer<DataSnapshot>() {
             @Override
             public void onChanged(@NonNull DataSnapshot dataSnapshot) {
+
+                dateText.setText(strDate);
+                timeText.setText(strTime);
+
                 if (dataSnapshot != null) {
 //                    Updata UI ketika terjadi perubahan dalam User
 
