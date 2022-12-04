@@ -109,12 +109,10 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.KataView
             for (int i=0; i<totalSize; i++) {
 
                 int entry = parseDateTime(mDaftarKata.get(position)[0]);
-                if (entry == -1) return;
                 int exit = parseDateTime(mDaftarKata.get(position)[1]);
-                if (exit == -1) return;
 
                 // Check if in range
-                if ((entry < from && exit < from) || (entry > to && exit > to)) {
+                if ((entry == -1) || (exit == -1) || (entry < from && exit < from) || (entry > to && exit > to)) {
                     mDaftarKata.remove(position);
                     notifyItemRemoved(position);
                     notifyItemRangeChanged(position, mDaftarKata.size());
