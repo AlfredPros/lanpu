@@ -78,19 +78,22 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.KataView
         }
     }
 
+    public int parseDate(String date) {
+        String[] fDate = date.split("/");
+        if (fDate.length != 3) return -1;
+        String fFromDate = fDate[2] + fDate[1] + fDate[0];
+        return Integer.parseInt(fFromDate);
+    }
+
     public void filterItem(String fromDate, String toDate) {
         //int from = Integer.parseInt(fromDate);
         //int to = Integer.parseInt(toDate);
 
-        String[] fDate = fromDate.split("/");
-        if (fDate.length != 3) return;
-        String fFromDate = fDate[2] + fDate[1] + fDate[0];
-        int from = Integer.parseInt(fFromDate);
+        int from = parseDate(fromDate);
+        if (from == -1) return;
 
-        String[] tDate = toDate.split("/");
-        if (tDate.length != 3) return;
-        String tToDate = tDate[2] + tDate[1] + tDate[0];
-        int to = Integer.parseInt(tToDate);
+        int to = parseDate(toDate);
+        if (to == -1) return;
 
         int totalSize = mDaftarKata.size();
 
@@ -99,6 +102,14 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.KataView
             for (int i=0; i<totalSize; i++) {
                 int entry =  Integer.parseInt(mDaftarKata.get(position)[0]);
                 int exit = Integer.parseInt(mDaftarKata.get(position)[1]);
+
+                // Uncomment this block when date entry and exit has been changed properly!
+                /*
+                int entry = parseDate(mDaftarKata.get(position)[0]);
+                //if (entry == -1) return;
+                int exit = parseDate(mDaftarKata.get(position)[1]);
+                //if (exit == -1) return;
+                */
 
                 // Check if in range
                 if ((entry < from && exit < from) || (entry > to && exit > to)) {
