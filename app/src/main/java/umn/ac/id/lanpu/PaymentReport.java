@@ -15,6 +15,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 
 import java.text.Format;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -79,13 +80,46 @@ public class PaymentReport extends AppCompatActivity {
                     nameTextView.setText(ticket.name);
                     idTextView.setText(ticket.userID);
 //                    TODO: FIX THIS ENTRY TIME
-                    entryTimeTextView.setText(convertTime(ticket.entryTime));
-                    exitTimeTextView.setText(convertTime(ticket.exitTime));
-                    durationTextView.setText(convertTime(ticket.exitTime - ticket.entryTime));
-                    priceTextView.setText((int) ticket.price);
+                    entryTimeTextView.setText(ticket.entryTime);
+                    exitTimeTextView.setText(ticket.exitTime);
+                    durationTextView.setText(findDifference(ticket.entryTime, ticket.exitTime));
+                    priceTextView.setText(String.valueOf(ticket.price));
                     categoryTextView.setText(ticket.category);
                 }
             }
         });
     }
+
+
+    static String findDifference(String start_date, String end_date) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+
+        try {
+            Date d1 = sdf.parse(start_date);
+            Date d2 = sdf.parse(end_date);
+
+            long difference_In_Time = d2.getTime() - d1.getTime();
+
+            long difference_In_Seconds = (difference_In_Time / 1000) % 60;
+
+            long difference_In_Minutes = (difference_In_Time / (1000 * 60)) % 60;
+
+            long difference_In_Hours = (difference_In_Time / (1000 * 60 * 60)) % 24;
+
+            long difference_In_Years = (difference_In_Time / (1000l * 60 * 60 * 24 * 365));
+
+            long difference_In_Days = (difference_In_Time / (1000 * 60 * 60 * 24)) % 365;
+
+            return (difference_In_Hours + " hours "
+                    + difference_In_Minutes + " mins "
+                    + difference_In_Seconds + " secs");
+
+        }
+        catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return "";
+    }
+
 }

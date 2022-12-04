@@ -9,13 +9,16 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Objects;
 
 import umn.ac.id.lanpu.FirebaseQueryLiveData;
 
 public class DashboardViewModel extends ViewModel {
-
-    private final MutableLiveData<Long> duration = new MutableLiveData<>(); //  TODO: Update data ini
+//    private final MutableLiveData<Long> entryTime = new MutableLiveData<>(); //  TODO: Update data ini
+//    private final MutableLiveData<String> duration = new MutableLiveData<>();
 
 
     private static final DatabaseReference usersTableReference = FirebaseDatabase.getInstance().getReference("Users");
@@ -24,7 +27,7 @@ public class DashboardViewModel extends ViewModel {
     private final FirebaseQueryLiveData liveData = new FirebaseQueryLiveData(userReference);
 
     public DashboardViewModel() {
-        duration.setValue(0L);
+
     }
 
     public LiveData<DataSnapshot> getDataSnapshotLiveData() {
@@ -35,16 +38,22 @@ public class DashboardViewModel extends ViewModel {
         return new FirebaseQueryLiveData(userReference.child("checkedIn"));
     }
 
-    public LiveData<Long> getDurationLiveDate() {
-        return duration;
+    public void setEntryTime(String time) {
+        userReference.child("entryTime").setValue(time);
+    }
+//    public String getDurationTime (long Duration) {
+//        java.time.Duration duration = Duration.between(LocalTime.NOON, LocalTime.MAX);
+//
+//        LocalDateTime date = LocalDateTime.now();
+//        System.out.println(date);
+//
+//        date = (LocalDateTime)duration.addTo(date);
+//        System.out.println(date);
+//    }
+
+    public LiveData<DataSnapshot> getEntryTime(){
+        return new FirebaseQueryLiveData(userReference.child("entryTime"));
     }
 
-    // TODO: Create FUNCTION that RETURNS DURATION as STRING time format
-    //  Return 00 days 00 minutes 00 seconds
-    //  public String getDurationTime(long duration)
 
-    // TODO: Create BACKGROUND PROCESS THAT UPDATES THE DURATION IN MILLISECONDS
-    //  Buatlah sebuah background process yang akan menhitung seconds ketika checkedIN berubah menjadi true
-    //  Simple aja buatnya cuma counter
-    //  public void startCounter()
 }

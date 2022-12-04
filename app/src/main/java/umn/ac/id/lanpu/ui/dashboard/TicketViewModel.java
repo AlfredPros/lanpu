@@ -58,4 +58,9 @@ public class TicketViewModel extends ViewModel {
             }
         });
     };
+
+    public FirebaseQueryLiveData getEntryTime(String userID) {
+        String ticketID = getActiveTicketofUser(userID).get().getResult().getValue(String.class);
+        return new FirebaseQueryLiveData(getTicket(ticketID).child("entryTime"));
+    }
 }

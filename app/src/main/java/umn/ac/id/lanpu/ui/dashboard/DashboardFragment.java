@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,8 +27,10 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import umn.ac.id.lanpu.ProcessingActivity;
 import umn.ac.id.lanpu.R;
@@ -38,12 +41,15 @@ public class DashboardFragment extends Fragment {
     private FragmentDashboardBinding binding;
     private int mode = 0;
     DashboardViewModel dashboardViewModel;
+    TicketViewModel ticketViewModel;
     private boolean checker = false;
 
-    private final Handler mHandler = new Handler();
+    private Handler mHandler = new Handler();
     public Calendar c;
     public String strDate;
     public String strTime;
+
+    private String entryTime;
 
     // Digunakan untuk menentukan Activity mana yang akan diload.
     private final int LOAD_ENTRY = 0;
@@ -68,23 +74,38 @@ public class DashboardFragment extends Fragment {
         final TextView dateText = binding.dateTextview;
         final TextView timeText = binding.timeTextview;
 
+
         // This function refreshes every second
         final Runnable mRunnable = new Runnable() {
             public void run() {
-                c = Calendar.getInstance();
-                SimpleDateFormat sdf = new SimpleDateFormat("EEEE, MMMM d, yyyy");
-                strDate = sdf.format(c.getTime());
-                dateText.setText(strDate);
 
-                sdf = new SimpleDateFormat("HH:mm:ss ZZZZ");
-                strTime = sdf.format(c.getTime());
-                timeText.setText(strTime);
+                if (entryTime == null) {
+                    c = Calendar.getInstance();
+                    SimpleDateFormat sdf = new SimpleDateFormat("EEEE, MMMM d, yyyy");
+                    strDate = sdf.format(c.getTime());
+                    dateText.setText(strDate);
+
+                    sdf = new SimpleDateFormat("HH:mm:ss ZZZZ");
+                    strTime = sdf.format(c.getTime());
+                    timeText.setText(strTime);
+                } else {
+                    c = Calendar.getInstance();
+                    SimpleDateFormat sdf = new SimpleDateFormat("EEEE, MMMM d, yyyy");
+                    strDate = sdf.format(c.getTime());
+                    dateText.setText(strDate);
+
+                    sdf = new SimpleDateFormat("HH:mm:ss ZZZZ");
+                    strTime = sdf.format(c.getTime());
+                    timeText.setText(strTime);
+
+                    sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                    String time = sdf.format(c.getTime());
+                    durationTextView.setText(findDifference(entryTime, time));
+                }
 
                 mHandler.postDelayed(this, 1000);
             }
         };
-
-        mHandler.post(mRunnable);
 
         // Live Data
         LiveData<DataSnapshot> liveData = dashboardViewModel.getDataSnapshotLiveData();
@@ -99,6 +120,9 @@ public class DashboardFragment extends Fragment {
                     String name = dataSnapshot.child("name").getValue(String.class);
 //                    String uid = dataSnapshot.getValue(String.class);
                     int balance = dataSnapshot.child("balance").getValue(int.class);
+                    entryTime = dataSnapshot.child("entryTime").getValue(String.class);
+//                    if (entryTime != null) mHandler.post(durationRunnable);
+//                    else mHandler.post(mRunnable);
 
 //                    Set data to View
                     nameTextView.setText(name);
@@ -136,6 +160,7 @@ public class DashboardFragment extends Fragment {
             }
         });
         return root;
+
     }
 
     @Override
@@ -143,27 +168,6 @@ public class DashboardFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//
-//        if (requestCode == 1) {
-//            if (resultCode == Activity.RESULT_OK) {
-//                mode = data.getIntExtra("mode", 1);
-//            }
-//            if (resultCode == Activity.RESULT_CANCELED) {
-//                mode = 0;
-//            }
-//        }
-//        TextView durationTextView = binding.durationTextview;
-//        MaterialCardView statusCard = binding.statusCard;
-////        dashboardViewModel.getDuration(this.mode).observe(getViewLifecycleOwner(), durationTextView::setText);
-//        if (mode == 1) {
-//            statusCard.setCardBackgroundColor(getResources().getColor(R.color.green));
-//        } else {
-//            statusCard.setCardBackgroundColor(getResources().getColor(R.color.red));
-//        }
-//    }
 
     public void changeStatus(boolean checkedIn) {
         MaterialCardView statusCard = binding.statusCard;
@@ -180,26 +184,59 @@ public class DashboardFragment extends Fragment {
                 viewTicketDetail(LOAD_ENTRY);
                 checker = checkedIn;
                 statusCard.setCardBackgroundColor(getResources().getColor(R.color.green));
-                dashboardViewModel.getDurationLiveDate().observe(getViewLifecycleOwner(), changeDuration);
+                c = Calendar.getInstance();
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY HH:mm:ss");
+                strDate = sdf.format(c.getTime());
+                dashboardViewModel.setEntryTime(strDate);
             }
         } else {
             if (checkedIn != checker) {
                 viewTicketDetail(LOAD_PAYMENT);
                 statusCard.setCardBackgroundColor(getResources().getColor(R.color.red));
-                dashboardViewModel.getDurationLiveDate().removeObserver(changeDuration);
+//                dashboardViewModel.getDurationLiveDate().removeObserver(changeDuration);
                 checker = checkedIn;
-//            Masukkan Durasi jika tidak bisa
-                durationTextView.setText("");
+                dashboardViewModel.setEntryTime(null);
             }
         }
     }
-
 
     public void viewTicketDetail(int loadMode){
         Intent getTicket = new Intent(getActivity(), ProcessingActivity.class);
         getTicket.putExtra("processingTitle", "Finding Ticket");
         getTicket.putExtra("loadMode", loadMode);
         startActivity(getTicket);
+    }
+
+
+    static String findDifference(String start_date, String end_date) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+
+        try {
+            Date d1 = sdf.parse(start_date);
+            Date d2 = sdf.parse(end_date);
+
+            long difference_In_Time = d2.getTime() - d1.getTime();
+
+            long difference_In_Seconds = (difference_In_Time / 1000) % 60;
+
+            long difference_In_Minutes = (difference_In_Time / (1000 * 60)) % 60;
+
+            long difference_In_Hours = (difference_In_Time / (1000 * 60 * 60)) % 24;
+
+            long difference_In_Years = (difference_In_Time / (1000l * 60 * 60 * 24 * 365));
+
+            long difference_In_Days = (difference_In_Time / (1000 * 60 * 60 * 24)) % 365;
+
+            return ( difference_In_Hours + " hours "
+                    + difference_In_Minutes + " mins "
+                    + difference_In_Seconds + " secs");
+
+        }
+        catch (ParseException e) {
+            Log.d("PARSE ERROR", e.getMessage().toString());
+        }
+
+        return "";
     }
 
 }
