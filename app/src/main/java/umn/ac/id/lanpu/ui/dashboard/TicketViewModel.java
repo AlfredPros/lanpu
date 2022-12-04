@@ -1,11 +1,8 @@
 package umn.ac.id.lanpu.ui.dashboard;
 
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModel;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -15,15 +12,12 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.MutableData;
 import com.google.firebase.database.Query;
-import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.Objects;
 
 import umn.ac.id.lanpu.FirebaseQueryLiveData;
-import umn.ac.id.lanpu.VerifyPayment;
 
 public class TicketViewModel extends ViewModel {
     // TODO: Implement the ViewModel
@@ -46,7 +40,7 @@ public class TicketViewModel extends ViewModel {
         return new FirebaseQueryLiveData(ticketsTableReference.orderByChild("userID").equalTo(userID));
     }
 
-    public Query getAllTicketofUserQuery (String userID) {
+    public Query getAllTicketofUserQuery(String userID) {
         return ticketsTableReference.orderByChild("userID").equalTo(userID);
     }
 
@@ -57,15 +51,18 @@ public class TicketViewModel extends ViewModel {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 int amount = snapshot.getValue(int.class);
-                revRef.setValue(amount + payment );
+                revRef.setValue(amount + payment);
                 activeTicketTableReference.child(userID).removeValue();
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Log.d("PAYMENT", "Payment onCancelled:  " + error.getMessage().toString());
             }
         });
-    };
+    }
+
+    ;
 
     public FirebaseQueryLiveData getEntryTime(String userID) {
         String ticketID = getActiveTicketofUser(userID).get().getResult().getValue(String.class);
@@ -73,21 +70,29 @@ public class TicketViewModel extends ViewModel {
     }
 
     public void eraseUserTickets(String userID) {
-        getAllTicketofUserQuery(userID).addListenerForSingleValueEvent(new ValueEventListener() {
+        getActiveTicketofUser(userID).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                ACtive Ticket
-                String filter_key = getActiveTicketofUser(userID).get().getResult().getValue(String.class);
-                for (DataSnapshot ticketSnapshot : snapshot.getChildren()) {
-                    if (ticketSnapshot.getRef().getKey().equals(filter_key)) continue;
-                    ticketSnapshot.getRef().removeValue();
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (task.isSuccessful()) {
+                    String filter_key = task.getResult().getValue(String.class);
+                    getAllTicketofUserQuery(userID).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for (DataSnapshot ticketSnapshot : snapshot.getChildren()) {
+                                if (!ticketSnapshot.getRef().getKey().equals(filter_key)) {
+                                    ticketSnapshot.getRef().removeValue();
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
                 }
             }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
         });
+
     }
 }
