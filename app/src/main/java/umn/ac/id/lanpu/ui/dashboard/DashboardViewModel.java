@@ -15,16 +15,11 @@ import umn.ac.id.lanpu.FirebaseQueryLiveData;
 
 public class DashboardViewModel extends ViewModel {
 
-    //    private final MutableLiveData<String> name, nim;
-//    private final MutableLiveData<Integer> balance;
-//    private final MutableLiveData<String> duration;
     private final MutableLiveData<Long> duration = new MutableLiveData<>();
-
     private static final DatabaseReference usersTableReference = FirebaseDatabase.getInstance().getReference("Users");
     private static final String userID = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
     private static final DatabaseReference userReference = usersTableReference.child(userID);
     private final FirebaseQueryLiveData liveData = new FirebaseQueryLiveData(userReference);
-//    private final MutableLiveData<String> currDate;
 
     public DashboardViewModel() {
         duration.setValue(0L);
