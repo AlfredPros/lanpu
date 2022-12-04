@@ -4,6 +4,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModel;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -62,5 +63,13 @@ public class TicketViewModel extends ViewModel {
     public FirebaseQueryLiveData getEntryTime(String userID) {
         String ticketID = getActiveTicketofUser(userID).get().getResult().getValue(String.class);
         return new FirebaseQueryLiveData(getTicket(ticketID).child("entryTime"));
+    }
+
+    public void eraseAllTicketUser(String userID) {
+        getAllTicketofUser(userID).observe((LifecycleOwner) this, dataSnapshot -> {
+            for(DataSnapshot ticketQuery: dataSnapshot.getChildren()) {
+                ticketsTableReference.child(ticketQuery.getKey()).removeValue();
+            }
+        } );
     }
 }
