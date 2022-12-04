@@ -2,11 +2,9 @@ package umn.ac.id.lanpu.ui.notifications;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -15,9 +13,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-import umn.ac.id.lanpu.AboutUs;
 import umn.ac.id.lanpu.LoginActivity;
-import umn.ac.id.lanpu.MainActivity;
 import umn.ac.id.lanpu.databinding.FragmentNotificationsBinding;
 
 public class NotificationsFragment extends Fragment {
@@ -35,6 +31,22 @@ public class NotificationsFragment extends Fragment {
         //final TextView textView = binding.textNotifications;
         //notificationsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 
+        binding.accountChangePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ChangePassword.class);
+                startActivity(intent);
+            }
+        });
+
+        binding.accountNotification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), NotificationSettings.class);
+                startActivity(intent);
+            }
+        });
+
         binding.aboutusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,6 +63,7 @@ public class NotificationsFragment extends Fragment {
                 Intent intent = new Intent(getActivity().getApplicationContext(), LoginActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
+                getActivity().finish();
             }
         });
 

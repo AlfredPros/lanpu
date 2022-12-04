@@ -2,6 +2,7 @@ package umn.ac.id.lanpu.ui.dashboard;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -20,6 +21,10 @@ import androidx.lifecycle.ViewModelProvider;
 import com.google.android.material.card.MaterialCardView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
 
 import umn.ac.id.lanpu.ProcessingActivity;
 import umn.ac.id.lanpu.R;
@@ -79,6 +84,25 @@ public class DashboardFragment extends Fragment {
                     nameTextView.setText(name);
                     nimTextView.setText(FirebaseAuth.getInstance().getCurrentUser().getUid());
                     balanceTextView.setText(("Rp " + balance));
+
+                    // QR Code
+                    QRCodeWriter writer = new QRCodeWriter();
+                    try {
+                        BitMatrix bitMatrix = writer.encode(nimTextView.getText().toString(), BarcodeFormat.QR_CODE, 512, 512);
+                        int width = bitMatrix.getWidth();
+                        int height = bitMatrix.getHeight();
+                        Bitmap bmp = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
+                        for (int x = 0; x < width; x++) {
+                            for (int y = 0; y < height; y++) {
+                                bmp.setPixel(x, y, bitMatrix.get(x, y) ? Color.BLACK : Color.WHITE);
+                            }
+                        }
+                        qrImageView.setPadding(0, 0, 0, 0);
+                        qrImageView.setImageBitmap(bmp);
+
+                    } catch (WriterException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });
