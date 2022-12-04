@@ -25,6 +25,7 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 
+import umn.ac.id.lanpu.ProcessingActivity;
 import umn.ac.id.lanpu.R;
 import umn.ac.id.lanpu.databinding.FragmentDashboardBinding;
 
@@ -95,6 +96,9 @@ public class DashboardFragment extends Fragment {
             public void onChanged(@NonNull DataSnapshot dataSnapshot) {
                 boolean checkedIn = dataSnapshot.getValue(boolean.class);
                 changeStatus(checkedIn);
+                if (checkedIn) {
+                    startViewTicket();
+                }
             }
         });
         return root;
@@ -105,28 +109,27 @@ public class DashboardFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == 1) {
-            if (resultCode == Activity.RESULT_OK) {
-                mode = data.getIntExtra("mode", 1);
-            }
-            if (resultCode == Activity.RESULT_CANCELED) {
-                mode = 0;
-            }
-        }
-        TextView durationTextView = binding.durationTextview;
-        MaterialCardView statusCard = binding.statusCard;
-//        dashboardViewModel.getDuration(this.mode).observe(getViewLifecycleOwner(), durationTextView::setText);
-        if (mode == 1) {
-            statusCard.setCardBackgroundColor(getResources().getColor(R.color.green));
-        } else {
-            statusCard.setCardBackgroundColor(getResources().getColor(R.color.red));
-        }
-    }
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//
+//        if (requestCode == 1) {
+//            if (resultCode == Activity.RESULT_OK) {
+//                mode = data.getIntExtra("mode", 1);
+//            }
+//            if (resultCode == Activity.RESULT_CANCELED) {
+//                mode = 0;
+//            }
+//        }
+//        TextView durationTextView = binding.durationTextview;
+//        MaterialCardView statusCard = binding.statusCard;
+////        dashboardViewModel.getDuration(this.mode).observe(getViewLifecycleOwner(), durationTextView::setText);
+//        if (mode == 1) {
+//            statusCard.setCardBackgroundColor(getResources().getColor(R.color.green));
+//        } else {
+//            statusCard.setCardBackgroundColor(getResources().getColor(R.color.red));
+//        }
+//    }
 
     public void changeStatus(boolean checkedIn) {
         MaterialCardView statusCard = binding.statusCard;
@@ -148,5 +151,12 @@ public class DashboardFragment extends Fragment {
 //            Masukkan Durasi jika tidak bisa
             durationTextView.setText("");
         }
+    }
+
+
+    public void startViewTicket(){
+        Intent getTicket = new Intent(getActivity(), ProcessingActivity.class);
+        getTicket.putExtra("processing_title", "Finding Ticket");
+        startActivity(getTicket);
     }
 }

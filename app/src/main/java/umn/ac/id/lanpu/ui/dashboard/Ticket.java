@@ -15,4 +15,14 @@ public class Ticket {
         this.exitTime = 0;
         this.price = 0;
     }
+
+    public Ticket(String ticketID, String userID, String name, String category, long entryTime, long exitTime, long price) {
+        this.ticketID = ticketID;
+        this.userID = userID;
+        this.name = name;
+        this.category = category;
+        this.entryTime = entryTime;
+        this.exitTime = exitTime;
+        this.price = price;
+    }
 }
