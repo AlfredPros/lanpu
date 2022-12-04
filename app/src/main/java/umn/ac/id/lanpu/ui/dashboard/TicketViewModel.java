@@ -4,6 +4,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModel;
 
@@ -14,7 +15,9 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.MutableData;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.Objects;
@@ -43,6 +46,10 @@ public class TicketViewModel extends ViewModel {
         return new FirebaseQueryLiveData(ticketsTableReference.orderByChild("userID").equalTo(userID));
     }
 
+    public Query getAllTicketofUserQuery (String userID) {
+        return ticketsTableReference.orderByChild("userID").equalTo(userID);
+    }
+
     public void pay(int payment) {
 //        TODO: Change how the payment works (cannot be done by user device, must be on admin's device)
         DatabaseReference revRef = FirebaseDatabase.getInstance().getReference("Revenue");
@@ -63,13 +70,5 @@ public class TicketViewModel extends ViewModel {
     public FirebaseQueryLiveData getEntryTime(String userID) {
         String ticketID = getActiveTicketofUser(userID).get().getResult().getValue(String.class);
         return new FirebaseQueryLiveData(getTicket(ticketID).child("entryTime"));
-    }
-
-    public void eraseAllTicketUser(String userID) {
-        getAllTicketofUser(userID).observe((LifecycleOwner) this, dataSnapshot -> {
-            for(DataSnapshot ticketQuery: dataSnapshot.getChildren()) {
-                ticketsTableReference.child(ticketQuery.getKey()).removeValue();
-            }
-        } );
     }
 }
