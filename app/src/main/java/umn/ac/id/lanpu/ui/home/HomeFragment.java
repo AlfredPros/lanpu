@@ -60,7 +60,9 @@ public class HomeFragment extends Fragment {
                 arr[2] = String.valueOf(ticket.ticketID);
                 arr[3] = String.valueOf(ticket.price);
 
-                mAdapter.addItem(arr);
+                if (ticket.exitTime != null) {
+                    mAdapter.addItem(arr);
+                }
             }
         });
 
