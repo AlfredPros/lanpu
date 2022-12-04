@@ -38,6 +38,7 @@ public class DashboardFragment extends Fragment {
     private FragmentDashboardBinding binding;
     private int mode = 0;
     DashboardViewModel dashboardViewModel;
+    private boolean checker = false;
 
     private final Handler mHandler = new Handler();
     public Calendar c;
@@ -128,9 +129,6 @@ public class DashboardFragment extends Fragment {
             public void onChanged(@NonNull DataSnapshot dataSnapshot) {
                 boolean checkedIn = dataSnapshot.getValue(boolean.class);
                 changeStatus(checkedIn);
-                if (checkedIn) {
-                    startViewTicket();
-                }
             }
         });
         return root;
@@ -176,9 +174,14 @@ public class DashboardFragment extends Fragment {
         if (checkedIn) {
             statusCard.setCardBackgroundColor(getResources().getColor(R.color.green));
             dashboardViewModel.getDurationLiveDate().observe(getViewLifecycleOwner(), changeDuration);
+            if (checkedIn != checker) {
+                startViewTicket();
+                checker = checkedIn;
+            }
         } else {
             statusCard.setCardBackgroundColor(getResources().getColor(R.color.red));
             dashboardViewModel.getDurationLiveDate().removeObserver(changeDuration);
+            checker = checkedIn;
 
 //            Masukkan Durasi jika tidak bisa
             durationTextView.setText("");
