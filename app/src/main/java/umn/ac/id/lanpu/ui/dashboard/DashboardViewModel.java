@@ -20,6 +20,7 @@ public class DashboardViewModel extends ViewModel {
 //    private final MutableLiveData<Long> entryTime = new MutableLiveData<>(); //  TODO: Update data ini
 //    private final MutableLiveData<String> duration = new MutableLiveData<>();
 
+    public MutableLiveData<Boolean> checker = new MutableLiveData<Boolean>();
 
     private static final DatabaseReference usersTableReference = FirebaseDatabase.getInstance().getReference("Users");
     private static final String userID = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
@@ -27,7 +28,7 @@ public class DashboardViewModel extends ViewModel {
     private final FirebaseQueryLiveData liveData = new FirebaseQueryLiveData(userReference);
 
     public DashboardViewModel() {
-
+        checker.setValue(false);
     }
 
     public LiveData<DataSnapshot> getDataSnapshotLiveData() {
@@ -37,6 +38,11 @@ public class DashboardViewModel extends ViewModel {
     public LiveData<DataSnapshot> getStatusLiveData() {
         return new FirebaseQueryLiveData(userReference.child("checkedIn"));
     }
+
+    public LiveData<Boolean> getChecker() {
+        return checker;
+    }
+
 
     public void setEntryTime(String time) {
         userReference.child("entryTime").setValue(time);

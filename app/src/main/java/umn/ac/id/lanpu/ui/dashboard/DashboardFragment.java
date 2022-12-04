@@ -57,8 +57,18 @@ public class DashboardFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+
+
         dashboardViewModel =
                 new ViewModelProvider(this).get(DashboardViewModel.class);
+
+        dashboardViewModel.getChecker().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                checker = aBoolean;
+            }
+        });
+
 
         binding = FragmentDashboardBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
@@ -183,7 +193,7 @@ public class DashboardFragment extends Fragment {
         if (checkedIn) {
             if (checkedIn != checker) { // Fire ketika hanya berubah
                 viewTicketDetail(LOAD_ENTRY);
-                checker = checkedIn;
+                dashboardViewModel.checker.setValue(checkedIn);
                 statusCard.setCardBackgroundColor(getResources().getColor(R.color.green));
                 c = Calendar.getInstance();
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY HH:mm:ss");
@@ -195,7 +205,7 @@ public class DashboardFragment extends Fragment {
                 viewTicketDetail(LOAD_PAYMENT);
                 statusCard.setCardBackgroundColor(getResources().getColor(R.color.red));
 //                dashboardViewModel.getDurationLiveDate().removeObserver(changeDuration);
-                checker = checkedIn;
+                dashboardViewModel.checker.setValue(checkedIn);
                 dashboardViewModel.setEntryTime(null);
             }
         }
