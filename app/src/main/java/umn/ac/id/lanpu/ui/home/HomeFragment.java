@@ -49,7 +49,8 @@ public class HomeFragment extends Fragment {
             public void onChanged(DataSnapshot dataSnapshot) {
                 for (DataSnapshot ticketQuery : dataSnapshot.getChildren()) {
                     Ticket ticket = ticketQuery.getValue(Ticket.class);
-                    Log.d("Ticket", String.valueOf((int) ticket.entryTime));
+                    ticket.ticketID = ticketQuery.getKey();
+                    Log.d("Ticket", ticket.ticketID);
                 }
             }
         });

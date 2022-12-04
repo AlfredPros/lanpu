@@ -15,7 +15,9 @@ import umn.ac.id.lanpu.FirebaseQueryLiveData;
 
 public class DashboardViewModel extends ViewModel {
 
-    private final MutableLiveData<Long> duration = new MutableLiveData<>();
+    private final MutableLiveData<Long> duration = new MutableLiveData<>(); //  TODO: Update data ini
+
+
     private static final DatabaseReference usersTableReference = FirebaseDatabase.getInstance().getReference("Users");
     private static final String userID = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
     private static final DatabaseReference userReference = usersTableReference.child(userID);
@@ -45,5 +47,4 @@ public class DashboardViewModel extends ViewModel {
     //  Buatlah sebuah background process yang akan menhitung seconds ketika checkedIN berubah menjadi true
     //  Simple aja buatnya cuma counter
     //  public void startCounter()
-
 }
