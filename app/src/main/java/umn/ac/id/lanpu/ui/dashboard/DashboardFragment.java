@@ -80,6 +80,8 @@ public class DashboardFragment extends Fragment {
         final TextView durationTextView = binding.durationTextview;
         final TextView balanceTextView = binding.balanceTextview;
 
+        final MaterialCardView statusCard = binding.statusCard;
+
         // Set Date Time
         final TextView dateText = binding.dateTextview;
         final TextView timeText = binding.timeTextview;
@@ -90,6 +92,8 @@ public class DashboardFragment extends Fragment {
             public void run() {
 
                 if (entryTime == null) {
+                    statusCard.setCardBackgroundColor(getResources().getColor(R.color.red));
+
                     c = Calendar.getInstance();
                     SimpleDateFormat sdf = new SimpleDateFormat("EEEE, MMMM d, yyyy");
                     strDate = sdf.format(c.getTime());
@@ -98,7 +102,11 @@ public class DashboardFragment extends Fragment {
                     sdf = new SimpleDateFormat("HH:mm:ss ZZZZ");
                     strTime = sdf.format(c.getTime());
                     timeText.setText(strTime);
+
+                    durationTextView.setText("");
                 } else {
+                    statusCard.setCardBackgroundColor(getResources().getColor(R.color.green));
+
                     c = Calendar.getInstance();
                     SimpleDateFormat sdf = new SimpleDateFormat("EEEE, MMMM d, yyyy");
                     strDate = sdf.format(c.getTime());
@@ -181,7 +189,6 @@ public class DashboardFragment extends Fragment {
     }
 
     public void changeStatus(boolean checkedIn) {
-        MaterialCardView statusCard = binding.statusCard;
         TextView durationTextView = binding.durationTextview;
         Observer<Long> changeDuration = new Observer<Long>() {
             @Override
@@ -194,7 +201,7 @@ public class DashboardFragment extends Fragment {
             if (checkedIn != checker) { // Fire ketika hanya berubah
                 viewTicketDetail(LOAD_ENTRY);
                 dashboardViewModel.checker.setValue(checkedIn);
-                statusCard.setCardBackgroundColor(getResources().getColor(R.color.green));
+
                 c = Calendar.getInstance();
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY HH:mm:ss");
                 strDate = sdf.format(c.getTime());
@@ -203,7 +210,6 @@ public class DashboardFragment extends Fragment {
         } else {
             if (checkedIn != checker) {
                 viewTicketDetail(LOAD_PAYMENT);
-                statusCard.setCardBackgroundColor(getResources().getColor(R.color.red));
 //                dashboardViewModel.getDurationLiveDate().removeObserver(changeDuration);
                 dashboardViewModel.checker.setValue(checkedIn);
                 dashboardViewModel.setEntryTime(null);
