@@ -77,7 +77,7 @@ public class TicketViewModel extends ViewModel {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 //                ACtive Ticket
-                String filter_key = getActiveTicketofUser(userID).getKey();
+                String filter_key = getActiveTicketofUser(userID).get().getResult().getValue(String.class);
                 for (DataSnapshot ticketSnapshot : snapshot.getChildren()) {
                     if (ticketSnapshot.getRef().getKey().equals(filter_key)) continue;
                     ticketSnapshot.getRef().removeValue();
