@@ -78,15 +78,31 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.KataView
         }
     }
 
-    public void filterItem(int totalSize) {
-        if (totalSize > 0) {
+    public void filterItem(String fromDate, String toDate) {
+        int from = Integer.parseInt(fromDate);
+        int to = Integer.parseInt(toDate);
+        int totalSize = mDaftarKata.size();
+
+        if (totalSize > 0 && from < to) {
+            int position = 0;
             for (int i=0; i<totalSize; i++) {
-                int position = 0;
-                mDaftarKata.remove(position);
-                notifyItemRemoved(position);
-                notifyItemRangeChanged(position, mDaftarKata.size());
+                int entry =  Integer.parseInt(mDaftarKata.get(position)[0]);
+                int exit = Integer.parseInt(mDaftarKata.get(position)[1]);
+
+                // Check if in range
+                if ((entry < from && exit < from) || (entry > to && exit > to)) {
+                    mDaftarKata.remove(position);
+                    notifyItemRemoved(position);
+                    notifyItemRangeChanged(position, mDaftarKata.size());
+                }
+                else {
+                    position++;
+                }
+
             }
         }
+
+
     }
 
     public void addItem(String[] arr) {

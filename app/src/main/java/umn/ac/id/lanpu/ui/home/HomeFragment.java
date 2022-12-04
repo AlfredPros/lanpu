@@ -63,7 +63,6 @@ public class HomeFragment extends Fragment {
                     arr[2] = String.valueOf(ticket.ticketID);
                     arr[3] = String.valueOf(ticket.price);
 
-                    //notifyItemRangeChanged(position, mDaftarKata.size();
                     mAdapter.addItem(arr);
                 }
             }
@@ -78,7 +77,7 @@ public class HomeFragment extends Fragment {
                 String toDate = binding.historyToDate.getText().toString();
 
                 if (!fromDate.equals("") && !toDate.equals("")) {
-                    mAdapter.filterItem(mHistoryList.size());
+                    mAdapter.filterItem(fromDate, toDate);
                 }
                 else {
                     Toast.makeText(v.getContext(), "Date must be entered!", Toast.LENGTH_LONG).show();
