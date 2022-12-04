@@ -56,6 +56,4 @@ public class DashboardViewModel extends ViewModel {
     public LiveData<DataSnapshot> getEntryTime(){
         return new FirebaseQueryLiveData(userReference.child("entryTime"));
     }
-
-
 }

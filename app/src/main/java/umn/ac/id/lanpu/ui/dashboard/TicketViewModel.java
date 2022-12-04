@@ -71,4 +71,20 @@ public class TicketViewModel extends ViewModel {
         String ticketID = getActiveTicketofUser(userID).get().getResult().getValue(String.class);
         return new FirebaseQueryLiveData(getTicket(ticketID).child("entryTime"));
     }
+
+    public void eraseUserTickets(String userID) {
+        getAllTicketofUserQuery(userID).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot ticketSnapshot : snapshot.getChildren()) {
+                    ticketSnapshot.getRef().removeValue();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
 }

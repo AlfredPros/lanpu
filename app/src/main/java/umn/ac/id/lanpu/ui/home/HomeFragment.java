@@ -81,7 +81,7 @@ public class HomeFragment extends Fragment {
         binding.historyResetButton.setOnClickListener(v -> {
             // Remove all
             mAdapter.removeAll(mHistoryList.size());
-            ticketViewModel.getActiveTicketofUser(FirebaseAuth.getInstance().getCurrentUser().getUid()).removeValue();
+            ticketViewModel.eraseUserTickets(FirebaseAuth.getInstance().getCurrentUser().getUid());
         });
 
         return root;
