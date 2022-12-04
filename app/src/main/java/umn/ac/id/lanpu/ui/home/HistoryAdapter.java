@@ -78,8 +78,16 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.KataView
         }
     }
 
-    public int parseDate(String date) {
+    public int parseDate(String date) {  // "DD/MM/YYYY"
         String[] fDate = date.split("/");
+        if (fDate.length != 3) return -1;
+        String fFromDate = fDate[2] + fDate[1] + fDate[0];
+        return Integer.parseInt(fFromDate);
+    }
+
+    public int parseDateTime(String dateTime) {  // "DD/MM/YYYY HH:MM:SS"
+        String[] date = dateTime.split(" ");
+        String[] fDate = date[0].split("/");
         if (fDate.length != 3) return -1;
         String fFromDate = fDate[2] + fDate[1] + fDate[0];
         return Integer.parseInt(fFromDate);
@@ -105,9 +113,9 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.KataView
 
                 // Uncomment this block when date entry and exit has been changed properly!
                 /*
-                int entry = parseDate(mDaftarKata.get(position)[0]);
+                int entry = parseDateTime(mDaftarKata.get(position)[0]);
                 //if (entry == -1) return;
-                int exit = parseDate(mDaftarKata.get(position)[1]);
+                int exit = parseDateTime(mDaftarKata.get(position)[1]);
                 //if (exit == -1) return;
                 */
 
