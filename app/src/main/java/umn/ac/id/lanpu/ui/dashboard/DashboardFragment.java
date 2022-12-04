@@ -86,14 +86,11 @@ public class DashboardFragment extends Fragment {
         final TextView dateText = binding.dateTextview;
         final TextView timeText = binding.timeTextview;
 
-
         // This function refreshes every second
         final Runnable mRunnable = new Runnable() {
             public void run() {
 
                 if (entryTime == null) {
-                    statusCard.setCardBackgroundColor(getResources().getColor(R.color.red));
-
                     c = Calendar.getInstance();
                     SimpleDateFormat sdf = new SimpleDateFormat("EEEE, MMMM d, yyyy");
                     strDate = sdf.format(c.getTime());
@@ -105,7 +102,7 @@ public class DashboardFragment extends Fragment {
 
                     durationTextView.setText("");
                 } else {
-                    statusCard.setCardBackgroundColor(getResources().getColor(R.color.green));
+//                    statusCard.setCardBackgroundColor(getResources().getColor(R.color.green));
 
                     c = Calendar.getInstance();
                     SimpleDateFormat sdf = new SimpleDateFormat("EEEE, MMMM d, yyyy");
@@ -176,6 +173,9 @@ public class DashboardFragment extends Fragment {
             public void onChanged(@NonNull DataSnapshot dataSnapshot) {
                 boolean checkedIn = dataSnapshot.getValue(boolean.class);
                 changeStatus(checkedIn);
+                if (checkedIn) binding.statusCard.setCardBackgroundColor(getResources().getColor(R.color.green));
+                else binding.statusCard.setCardBackgroundColor(getResources().getColor(R.color.red));
+
             }
         });
         return root;
