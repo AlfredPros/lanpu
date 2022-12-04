@@ -205,14 +205,14 @@ public class DashboardFragment extends Fragment {
                 c = Calendar.getInstance();
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY HH:mm:ss");
                 strDate = sdf.format(c.getTime());
-                dashboardViewModel.setEntryTime(strDate);
+//                dashboardViewModel.setEntryTime(strDate);
             }
         } else {
             if (checkedIn != checker) {
                 viewTicketDetail(LOAD_PAYMENT);
 //                dashboardViewModel.getDurationLiveDate().removeObserver(changeDuration);
                 dashboardViewModel.checker.setValue(checkedIn);
-                dashboardViewModel.setEntryTime(null);
+//                dashboardViewModel.setEntryTime(null);
             }
         }
     }

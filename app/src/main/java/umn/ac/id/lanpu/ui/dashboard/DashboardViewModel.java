@@ -43,10 +43,6 @@ public class DashboardViewModel extends ViewModel {
         return checker;
     }
 
-
-    public void setEntryTime(String time) {
-        userReference.child("entryTime").setValue(time);
-    }
 //    public String getDurationTime (long Duration) {
 //        java.time.Duration duration = Duration.between(LocalTime.NOON, LocalTime.MAX);
 //
