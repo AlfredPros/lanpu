@@ -68,8 +68,6 @@ public class DashboardFragment extends Fragment {
 //            }
 //        });
 
-
-
         LiveData<DataSnapshot> liveData = dashboardViewModel.getDataSnapshotLiveData();
         liveData.observe(getViewLifecycleOwner(), new Observer<DataSnapshot>() {
             @Override
@@ -99,6 +97,7 @@ public class DashboardFragment extends Fragment {
                                 bmp.setPixel(x, y, bitMatrix.get(x, y) ? Color.BLACK : Color.WHITE);
                             }
                         }
+                        qrImageView.setPadding(0, 0, 0, 0);
                         qrImageView.setImageBitmap(bmp);
 
                     } catch (WriterException e) {
