@@ -111,11 +111,30 @@ public class DashboardFragment extends Fragment {
         }
         TextView durationTextView = binding.durationTextview;
         MaterialCardView statusCard = binding.statusCard;
-        dashboardViewModel.getDuration(this.mode).observe(getViewLifecycleOwner(), durationTextView::setText);
+//        dashboardViewModel.getDuration(this.mode).observe(getViewLifecycleOwner(), durationTextView::setText);
         if (mode == 1) {
             statusCard.setCardBackgroundColor(getResources().getColor(R.color.green));
         } else {
             statusCard.setCardBackgroundColor(getResources().getColor(R.color.red));
+        }
+    }
+
+    public void changeStatus(boolean checkedIn) {
+        MaterialCardView statusCard = binding.statusCard;
+        TextView durationTextView = binding.durationTextview;
+        Observer<Long> changeDuration = new Observer<Long>() {
+            @Override
+            public void onChanged(Long aLong) {
+                durationTextView.setText(aLong.intValue());
+            }
+        };
+        if (checkedIn) {
+
+            statusCard.setCardBackgroundColor(getResources().getColor(R.color.green));
+            dashboardViewModel.getDurationLiveDate().observe(getViewLifecycleOwner(), changeDuration);
+        } else {
+            statusCard.setCardBackgroundColor(getResources().getColor(R.color.red));
+            dashboardViewModel.getDurationLiveDate().removeObserver(changeDuration);
         }
     }
 }

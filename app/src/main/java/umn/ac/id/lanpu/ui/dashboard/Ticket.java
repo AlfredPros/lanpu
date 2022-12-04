@@ -1,0 +1,18 @@
+package umn.ac.id.lanpu.ui.dashboard;
+
+public class Ticket {
+    public String ticketID, userID, name, category;
+    public long entryTime, exitTime, price;
+
+    public Ticket(){}
+
+    public Ticket(String ticketID, String userID, String name, String category, long entryTime){
+        this.ticketID = ticketID;
+        this.userID = userID;
+        this.name = name;
+        this.category = category;
+        this.entryTime = entryTime;
+        this.exitTime = 0;
+        this.price = 0;
+    }
+}

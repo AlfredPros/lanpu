@@ -2,7 +2,7 @@ package umn.ac.id.lanpu;
 
 public class User {
     public String id, name, email;
-    public int balance;
+    public long balance;
     public boolean checkedIn;
 
     public User(String name, String email, int balance){

@@ -13,12 +13,10 @@
         <entry key="..\:/FTI/IF634_IS534_MOBILE/workspaces/lanpu/app/src/main/res/layout/activity_main.xml" value="0.16666666666666666" />
         <entry key="..\:/FTI/IF634_IS534_MOBILE/workspaces/lanpu/app/src/main/res/layout/fragment_home.xml" value="0.3333333333333333" />
         <entry key="..\:/FTI/IF634_IS534_MOBILE/workspaces/lanpu/app/src/main/res/menu/bottom_nav_menu.xml" value="0.1796875" />
-        <entry key="..\:/UMN/Semester5/IF570_MAP/UAS/lanpu/app/src/main/res/drawable/loading_icon.xml" value="0.122" />
-        <entry key="..\:/UMN/Semester5/IF570_MAP/UAS/lanpu/app/src/main/res/layout/activity_verify_payment.xml" value="0.12158054711246201" />
-        <entry key="..\:/UMN/Semester5/IF570_MAP/UAS/lanpu/app/src/main/res/layout/fragment_dashboard.xml" value="0.25" />
-        <entry key="..\:/UMN/Semester5/IF570_MAP/UAS/lanpu/app/src/main/res/layout/login_screen.xml" value="0.25" />
-        <entry key="..\:/UMN/Semester5/IF570_MAP/UAS/lanpu/app/src/main/res/layout/login_signup_screen.xml" value="0.11041666666666666" />
-        <entry key="..\:/UMN/Semester5/IF570_MAP/UAS/lanpu/app/src/main/res/layout/signup_screen.xml" value="0.4" />
+        <entry key="..\:/UMN/Semester5/IF570_MAP/UAS/lanpu/app/src/main/res/layout/activity_payment_report.xml" value="0.6" />
+        <entry key="..\:/UMN/Semester5/IF570_MAP/UAS/lanpu/app/src/main/res/layout/activity_verify_payment.xml" value="0.20199275362318841" />
+        <entry key="..\:/UMN/Semester5/IF570_MAP/UAS/lanpu/app/src/main/res/layout/fragment_ticket.xml" value="0.25" />
+        <entry key="..\:/UMN/Semester5/IF570_MAP/UAS/lanpu/app/src/main/res/layout/history_item.xml" value="0.25" />
         <entry key="..\:/Users/ASUS/Documents/GitHub/lanpu/app/src/main/res/drawable/ic_launcher_background.xml" value="0.225" />
         <entry key="..\:/Users/ASUS/Documents/GitHub/lanpu/app/src/main/res/layout/account_aboutus.xml" value="0.2" />
         <entry key="..\:/Users/ASUS/Documents/GitHub/lanpu/app/src/main/res/layout/account_password.xml" value="0.33" />
