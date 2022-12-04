@@ -9,7 +9,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,9 +17,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 
 import java.util.LinkedList;
+import java.util.Objects;
 
 import umn.ac.id.lanpu.databinding.FragmentHomeBinding;
-
 import umn.ac.id.lanpu.ui.dashboard.Ticket;
 import umn.ac.id.lanpu.ui.dashboard.TicketViewModel;
 
@@ -32,8 +31,6 @@ public class HomeFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        HomeViewModel homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
 
         TicketViewModel ticketViewModel = new ViewModelProvider(this).get(TicketViewModel.class);
 
@@ -48,49 +45,42 @@ public class HomeFragment extends Fragment {
 
 
         // Fetch Database
-        LiveData<DataSnapshot> ticketsLiveData = ticketViewModel.getAllTicketofUser(FirebaseAuth.getInstance().getCurrentUser().getUid());
-        ticketsLiveData.observe(getViewLifecycleOwner(), new Observer<DataSnapshot>() {
-            @Override
-            public void onChanged(DataSnapshot dataSnapshot) {
-                //String ticketID = dataSnapshot.getValue(String.class);
-                for (DataSnapshot ticketQuery : dataSnapshot.getChildren()) {
-                    Ticket ticket = ticketQuery.getValue(Ticket.class);
-                    ticket.ticketID = ticketQuery.getKey();
+        LiveData<DataSnapshot> ticketsLiveData = ticketViewModel.getAllTicketofUser(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid());
+        ticketsLiveData.observe(getViewLifecycleOwner(), dataSnapshot -> {
+            mAdapter.removeAll(mAdapter.getItemCount());
+            //String ticketID = dataSnapshot.getValue(String.class);
+            for (DataSnapshot ticketQuery : dataSnapshot.getChildren()) {
+                Ticket ticket = ticketQuery.getValue(Ticket.class);
+                assert ticket != null;
+                ticket.ticketID = ticketQuery.getKey();
 
-                    String[] arr = new String[4];
-                    arr[0] = String.valueOf(ticket.entryTime);
-                    arr[1] = String.valueOf(ticket.exitTime);
-                    arr[2] = String.valueOf(ticket.ticketID);
-                    arr[3] = String.valueOf(ticket.price);
+                String[] arr = new String[4];
+                arr[0] = String.valueOf(ticket.entryTime);
+                arr[1] = String.valueOf(ticket.exitTime);
+                arr[2] = String.valueOf(ticket.ticketID);
+                arr[3] = String.valueOf(ticket.price);
 
-                    mAdapter.addItem(arr);
-                }
+                mAdapter.addItem(arr);
             }
         });
 
 
-        binding.historyFilterButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Filter
-                String fromDate = binding.historyFromDate.getText().toString();
-                String toDate = binding.historyToDate.getText().toString();
+        binding.historyFilterButton.setOnClickListener(v -> {
+            // Filter
+            String fromDate = binding.historyFromDate.getText().toString();
+            String toDate = binding.historyToDate.getText().toString();
 
-                if (!fromDate.equals("") && !toDate.equals("")) {
-                    mAdapter.filterItem(fromDate, toDate);
-                }
-                else {
-                    Toast.makeText(v.getContext(), "Date must be entered!", Toast.LENGTH_LONG).show();
-                }
+            if (!fromDate.equals("") && !toDate.equals("")) {
+                mAdapter.filterItem(fromDate, toDate);
+            }
+            else {
+                Toast.makeText(v.getContext(), "Date must be entered!", Toast.LENGTH_LONG).show();
             }
         });
 
-        binding.historyResetButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Remove all
-                mAdapter.removeAll(mHistoryList.size());
-            }
+        binding.historyResetButton.setOnClickListener(v -> {
+            // Remove all
+            mAdapter.removeAll(mHistoryList.size());
         });
 
         return root;
