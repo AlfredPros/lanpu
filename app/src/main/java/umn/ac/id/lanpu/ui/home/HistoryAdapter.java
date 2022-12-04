@@ -2,6 +2,7 @@ package umn.ac.id.lanpu.ui.home;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -94,8 +95,6 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.KataView
     }
 
     public void filterItem(String fromDate, String toDate) {
-//        int from = Integer.parseInt(fromDate);
-//        int to = Integer.parseInt(toDate);
 
         int from = parseDate(fromDate);
         if (from == -1) return;
@@ -108,16 +107,11 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.KataView
         if (totalSize > 0 && from < to) {
             int position = 0;
             for (int i=0; i<totalSize; i++) {
-//                int entry =  Integer.parseInt(mDaftarKata.get(position)[0]);
-//                int exit = Integer.parseInt(mDaftarKata.get(position)[1]);
 
-                // Uncomment this block when date entry and exit has been changed properly!
-
-                int entry = parseDate(mDaftarKata.get(position)[0]);
-                //if (entry == -1) return;
+                int entry = parseDateTime(mDaftarKata.get(position)[0]);
+                if (entry == -1) return;
                 int exit = parseDateTime(mDaftarKata.get(position)[1]);
-                //if (exit == -1) return;
-
+                if (exit == -1) return;
 
                 // Check if in range
                 if ((entry < from && exit < from) || (entry > to && exit > to)) {
@@ -130,6 +124,8 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.KataView
                 }
             }
         }
+
+
     }
 
     public void addItem(String[] arr) {
