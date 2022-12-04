@@ -79,8 +79,19 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.KataView
     }
 
     public void filterItem(String fromDate, String toDate) {
-        int from = Integer.parseInt(fromDate);
-        int to = Integer.parseInt(toDate);
+        //int from = Integer.parseInt(fromDate);
+        //int to = Integer.parseInt(toDate);
+
+        String[] fDate = fromDate.split("/");
+        if (fDate.length != 3) return;
+        String fFromDate = fDate[2] + fDate[1] + fDate[0];
+        int from = Integer.parseInt(fFromDate);
+
+        String[] tDate = toDate.split("/");
+        if (tDate.length != 3) return;
+        String tToDate = tDate[2] + tDate[1] + tDate[0];
+        int to = Integer.parseInt(tToDate);
+
         int totalSize = mDaftarKata.size();
 
         if (totalSize > 0 && from < to) {
