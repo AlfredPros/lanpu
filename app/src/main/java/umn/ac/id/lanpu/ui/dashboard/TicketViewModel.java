@@ -31,4 +31,8 @@ public class TicketViewModel extends ViewModel {
     public DatabaseReference getActiveTicketofUser(String userID) {
         return activeTicketTableReference.child(userID);
     }
+
+    public FirebaseQueryLiveData getAllTicketofUser(String userID) {
+        return new FirebaseQueryLiveData(ticketsTableReference.orderByChild("userID").equalTo(userID));
+    }
 }

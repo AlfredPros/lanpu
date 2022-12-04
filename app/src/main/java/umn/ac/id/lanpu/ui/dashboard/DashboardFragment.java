@@ -45,6 +45,10 @@ public class DashboardFragment extends Fragment {
     public String strDate;
     public String strTime;
 
+    // Digunakan untuk menentukan Activity mana yang akan diload.
+    private final int LOAD_ENTRY = 0;
+    private final int LOAD_PAYMENT = 1;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         dashboardViewModel =
@@ -175,7 +179,7 @@ public class DashboardFragment extends Fragment {
             statusCard.setCardBackgroundColor(getResources().getColor(R.color.green));
             dashboardViewModel.getDurationLiveDate().observe(getViewLifecycleOwner(), changeDuration);
             if (checkedIn != checker) {
-                startViewTicket();
+                viewEntryTicket();
                 checker = checkedIn;
             }
         } else {
@@ -189,7 +193,13 @@ public class DashboardFragment extends Fragment {
     }
 
 
-    public void startViewTicket(){
+    public void viewEntryTicket(){
+        Intent getTicket = new Intent(getActivity(), ProcessingActivity.class);
+        getTicket.putExtra("processing_title", "Finding Ticket");
+        startActivity(getTicket);
+    }
+
+    public void viewPaymentTicket() {
         Intent getTicket = new Intent(getActivity(), ProcessingActivity.class);
         getTicket.putExtra("processing_title", "Finding Ticket");
         startActivity(getTicket);

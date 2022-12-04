@@ -32,7 +32,7 @@ public class ProcessingActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         String title = null;
         if (extras != null) {
-//            loadMode = extras.getInt("load_mode");
+            loadMode = extras.getInt("loadMode");
             title = extras.getString("processing_title");
         }
         TextView processingTextview = findViewById(R.id.processing_textview);
@@ -50,6 +50,7 @@ public class ProcessingActivity extends AppCompatActivity {
                 }
                 else {
                     Log.d("firebase", String.valueOf(task.getResult().getValue()));
+                    // Jika user baru di checked in maka tampilkan ticket masuk
                     Intent enterIntent = new Intent(ProcessingActivity.this, EntryActivity.class);
                     enterIntent.putExtra("ticketID", task.getResult().getValue(String.class));
                     startActivity(enterIntent);
@@ -57,5 +58,7 @@ public class ProcessingActivity extends AppCompatActivity {
                 }
             }
         });
+
+
     }
 }

@@ -12,15 +12,22 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
 
 import java.util.LinkedList;
 
 import umn.ac.id.lanpu.databinding.FragmentHomeBinding;
 
 import umn.ac.id.lanpu.R;
+import umn.ac.id.lanpu.ui.dashboard.Ticket;
+import umn.ac.id.lanpu.ui.dashboard.TicketViewModel;
 
 public class HomeFragment extends Fragment {
 
@@ -32,6 +39,20 @@ public class HomeFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         HomeViewModel homeViewModel =
                 new ViewModelProvider(this).get(HomeViewModel.class);
+
+        TicketViewModel ticketViewModel = new ViewModelProvider(this).get(TicketViewModel.class);
+
+
+        LiveData<DataSnapshot> ticketsLiveData = ticketViewModel.getAllTicketofUser(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        ticketsLiveData.observe(getViewLifecycleOwner(), new Observer<DataSnapshot>() {
+            @Override
+            public void onChanged(DataSnapshot dataSnapshot) {
+                for (DataSnapshot ticketQuery : dataSnapshot.getChildren()) {
+                    Ticket ticket = ticketQuery.getValue(Ticket.class);
+                    Log.d("Ticket", String.valueOf((int) ticket.entryTime));
+                }
+            }
+        });
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
