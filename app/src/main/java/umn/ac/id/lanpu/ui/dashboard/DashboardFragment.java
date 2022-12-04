@@ -106,6 +106,7 @@ public class DashboardFragment extends Fragment {
                 mHandler.postDelayed(this, 1000);
             }
         };
+        mHandler.post(mRunnable);
 
         // Live Data
         LiveData<DataSnapshot> liveData = dashboardViewModel.getDataSnapshotLiveData();
