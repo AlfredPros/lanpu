@@ -1,6 +1,5 @@
 package umn.ac.id.lanpu.ui.dashboard;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -33,6 +32,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Objects;
 
 import umn.ac.id.lanpu.ProcessingActivity;
 import umn.ac.id.lanpu.R;
@@ -41,12 +41,10 @@ import umn.ac.id.lanpu.databinding.FragmentDashboardBinding;
 public class DashboardFragment extends Fragment {
 
     private FragmentDashboardBinding binding;
-    private int mode = 0;
     DashboardViewModel dashboardViewModel;
-    TicketViewModel ticketViewModel;
     private boolean checker = false;
 
-    private Handler mHandler = new Handler();
+    private final Handler mHandler = new Handler();
     public Calendar c;
     public String strDate;
     public String strTime;
@@ -64,12 +62,7 @@ public class DashboardFragment extends Fragment {
         dashboardViewModel =
                 new ViewModelProvider(this).get(DashboardViewModel.class);
 
-        dashboardViewModel.getChecker().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
-            @Override
-            public void onChanged(Boolean aBoolean) {
-                checker = aBoolean;
-            }
-        });
+        dashboardViewModel.getChecker().observe(getViewLifecycleOwner(), aBoolean -> checker = aBoolean);
 
 
         binding = FragmentDashboardBinding.inflate(inflater, container, false);
@@ -128,66 +121,68 @@ public class DashboardFragment extends Fragment {
 
         // Live Data
         LiveData<DataSnapshot> liveData = dashboardViewModel.getDataSnapshotLiveData();
-        liveData.observe(getViewLifecycleOwner(), new Observer<DataSnapshot>() {
-            @Override
-            public void onChanged(@NonNull DataSnapshot dataSnapshot) {
+        liveData.observe(getViewLifecycleOwner(), dataSnapshot -> {
 
-                if (dataSnapshot != null) {
+            if (dataSnapshot != null) {
 //                    Updata UI ketika terjadi perubahan dalam User
 
 //                    Get data
-                    String name = dataSnapshot.child("name").getValue(String.class);
+                String name = dataSnapshot.child("name").getValue(String.class);
 //                    String uid = dataSnapshot.getValue(String.class);
-                    int balance = dataSnapshot.child("balance").getValue(int.class);
-                    entryTime = dataSnapshot.child("entryTime").getValue(String.class);
+                int balance = dataSnapshot.child("balance").getValue(int.class);
+                entryTime = dataSnapshot.child("entryTime").getValue(String.class);
 //                    if (entryTime != null) mHandler.post(durationRunnable);
 //                    else mHandler.post(mRunnable);
 
 //                    Set data to View
-                    nameTextView.setText(name);
-                    nimTextView.setText(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                nameTextView.setText(name);
+                nimTextView.setText(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid());
 
-                    NumberFormat cf = NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
-                    balanceTextView.setText(cf.format(balance).replace("p", "p "));
+                NumberFormat cf = NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
+                balanceTextView.setText(cf.format(balance).replace("p", "p "));
 
-                    // QR Code
-                    QRCodeWriter writer = new QRCodeWriter();
-                    try {
-                        BitMatrix bitMatrix = writer.encode(nimTextView.getText().toString(), BarcodeFormat.QR_CODE, 512, 512);
-                        int width = bitMatrix.getWidth();
-                        int height = bitMatrix.getHeight();
-                        Bitmap bmp = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
-                        for (int x = 0; x < width; x++) {
-                            for (int y = 0; y < height; y++) {
-                                bmp.setPixel(x, y, bitMatrix.get(x, y) ? Color.BLACK : Color.WHITE);
-                            }
+                // QR Code
+                QRCodeWriter writer = new QRCodeWriter();
+                try {
+                    BitMatrix bitMatrix = writer.encode(nimTextView.getText().toString(), BarcodeFormat.QR_CODE, 512, 512);
+                    int width = bitMatrix.getWidth();
+                    int height = bitMatrix.getHeight();
+                    Bitmap bmp = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
+                    for (int x = 0; x < width; x++) {
+                        for (int y = 0; y < height; y++) {
+                            bmp.setPixel(x, y, bitMatrix.get(x, y) ? Color.BLACK : Color.WHITE);
                         }
-                        qrImageView.setPadding(0, 0, 0, 0);
-                        qrImageView.setImageBitmap(bmp);
-
-                    } catch (WriterException e) {
-                        e.printStackTrace();
                     }
+                    qrImageView.setPadding(0, 0, 0, 0);
+                    qrImageView.setImageBitmap(bmp);
 
-                    if (balance <= -50000) {
-                        warningdebt.setVisibility(View.VISIBLE);
-                    } else {
-                        warningdebt.setVisibility(View.GONE);
-                    }
+                } catch (WriterException e) {
+                    e.printStackTrace();
+                }
+
+                if (balance <= -50000) {
+                    warningdebt.setVisibility(View.VISIBLE);
+                } else {
+                    warningdebt.setVisibility(View.GONE);
                 }
             }
         });
 
-        LiveData<DataSnapshot> statusLiveData = dashboardViewModel.getStatusLiveData();
-        statusLiveData.observe(getViewLifecycleOwner(), new Observer<DataSnapshot>() {
-            @Override
-            public void onChanged(@NonNull DataSnapshot dataSnapshot) {
-                boolean checkedIn = dataSnapshot.getValue(boolean.class);
-                changeStatus(checkedIn);
-                if (checkedIn) binding.statusCard.setCardBackgroundColor(getResources().getColor(R.color.green));
-                else binding.statusCard.setCardBackgroundColor(getResources().getColor(R.color.red));
-
+        LiveData<DataSnapshot> paymentLiveData = dashboardViewModel.getPaymentRequestLiveData(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid());
+        paymentLiveData.observe(getViewLifecycleOwner(), dataSnapshot -> {
+            if (dataSnapshot.exists()) {
+                viewTicketDetail(LOAD_PAYMENT);
             }
+        });
+
+        LiveData<DataSnapshot> statusLiveData = dashboardViewModel.getStatusLiveData();
+        statusLiveData.observe(getViewLifecycleOwner(), dataSnapshot -> {
+            boolean checkedIn = dataSnapshot.getValue(boolean.class);
+            changeStatus(checkedIn);
+            if (checkedIn)
+                binding.statusCard.setCardBackgroundColor(getResources().getColor(R.color.green));
+            else
+                binding.statusCard.setCardBackgroundColor(getResources().getColor(R.color.red));
         });
         return root;
 
@@ -200,35 +195,19 @@ public class DashboardFragment extends Fragment {
     }
 
     public void changeStatus(boolean checkedIn) {
-        TextView durationTextView = binding.durationTextview;
-        Observer<Long> changeDuration = new Observer<Long>() {
-            @Override
-            public void onChanged(Long aLong) {
-                // Handle duration TextView ketika data Duration berubah
-                durationTextView.setText(aLong.toString());
-            }
-        };
         if (checkedIn) {
             if (checkedIn != checker) { // Fire ketika hanya berubah
                 viewTicketDetail(LOAD_ENTRY);
                 dashboardViewModel.checker.setValue(checkedIn);
-
                 c = Calendar.getInstance();
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY HH:mm:ss");
                 strDate = sdf.format(c.getTime());
-//                dashboardViewModel.setEntryTime(strDate);
-            }
-        } else {
-            if (checkedIn != checker) {
-                viewTicketDetail(LOAD_PAYMENT);
-//                dashboardViewModel.getDurationLiveDate().removeObserver(changeDuration);
-                dashboardViewModel.checker.setValue(checkedIn);
-//                dashboardViewModel.setEntryTime(null);
             }
         }
     }
 
-    public void viewTicketDetail(int loadMode){
+
+    public void viewTicketDetail(int loadMode) {
         Intent getTicket = new Intent(getActivity(), ProcessingActivity.class);
         getTicket.putExtra("processingTitle", "Finding Ticket");
         getTicket.putExtra("loadMode", loadMode);
@@ -255,13 +234,12 @@ public class DashboardFragment extends Fragment {
 
             long difference_In_Days = (difference_In_Time / (1000 * 60 * 60 * 24)) % 365;
 
-            return ( difference_In_Hours + " hours "
+            return (difference_In_Hours + " hours "
                     + difference_In_Minutes + " mins "
                     + difference_In_Seconds + " secs");
 
-        }
-        catch (ParseException e) {
-            Log.d("PARSE ERROR", e.getMessage().toString());
+        } catch (ParseException e) {
+            Log.d("PARSE ERROR", Objects.requireNonNull(e.getMessage()));
         }
 
         return "";

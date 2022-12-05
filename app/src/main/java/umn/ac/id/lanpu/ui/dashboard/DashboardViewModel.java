@@ -19,8 +19,8 @@ import java.util.Objects;
 import umn.ac.id.lanpu.FirebaseQueryLiveData;
 
 public class DashboardViewModel extends ViewModel {
-    public MutableLiveData<Boolean> checker = new MutableLiveData<Boolean>();
-
+    public MutableLiveData<Boolean> checker = new MutableLiveData<>();
+    private static final DatabaseReference paymentRequestTableReference = FirebaseDatabase.getInstance().getReference("PaymentRequest");
     private static final DatabaseReference usersTableReference = FirebaseDatabase.getInstance().getReference("Users");
     private static String userID;
     private static DatabaseReference userReference;
@@ -41,19 +41,18 @@ public class DashboardViewModel extends ViewModel {
         return new FirebaseQueryLiveData(userReference.child("checkedIn"));
     }
 
+    public void pay(String userID) {
+//        TODO: Change how the payment works (cannot be done by user device, must be on admin's device)
+        paymentRequestTableReference.child(userID).child("ack").setValue(true);
+    }
+
     public LiveData<Boolean> getChecker() {
         return checker;
     }
 
-//    public String getDurationTime (long Duration) {
-//        java.time.Duration duration = Duration.between(LocalTime.NOON, LocalTime.MAX);
-//
-//        LocalDateTime date = LocalDateTime.now();
-//        System.out.println(date);
-//
-//        date = (LocalDateTime)duration.addTo(date);
-//        System.out.println(date);
-//    }
+    public FirebaseQueryLiveData getPaymentRequestLiveData(String userID) {
+        return new FirebaseQueryLiveData(paymentRequestTableReference.child(userID));
+    }
 
     public LiveData<DataSnapshot> getEntryTime(){
         return new FirebaseQueryLiveData(userReference.child("entryTime"));
