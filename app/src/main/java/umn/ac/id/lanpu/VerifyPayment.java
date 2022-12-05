@@ -17,9 +17,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 
 import java.text.Format;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import umn.ac.id.lanpu.ui.dashboard.Ticket;
 import umn.ac.id.lanpu.ui.dashboard.TicketViewModel;
@@ -72,7 +74,8 @@ public class VerifyPayment extends AppCompatActivity {
                     idTextView.setText(ticket.userID);
                     entryTimeTextView.setText(ticket.entryTime);
                     durationTextView.setText(findDifference(ticket.entryTime, ticket.exitTime));
-                    priceTextView.setText(String.valueOf((int) ticket.price));
+                    NumberFormat cf = NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
+                    priceTextView.setText(cf.format(ticket.price).replace("p", "p "));
                     categoryTextView.setText(ticket.category);
                     payButton.setOnClickListener(new View.OnClickListener() {
                         @Override
