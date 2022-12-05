@@ -124,7 +124,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Rp 100.000,-"
+                    android:text="Rp 0"
                     android:textColor="@color/black"
                     android:textSize="20sp"/>
             </LinearLayout>
