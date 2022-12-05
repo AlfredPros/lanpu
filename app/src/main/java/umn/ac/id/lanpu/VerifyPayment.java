@@ -23,6 +23,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import umn.ac.id.lanpu.ui.dashboard.DashboardViewModel;
 import umn.ac.id.lanpu.ui.dashboard.Ticket;
 import umn.ac.id.lanpu.ui.dashboard.TicketViewModel;
 
@@ -31,6 +32,7 @@ public class VerifyPayment extends AppCompatActivity {
     private TextView ticketNumberTextView, nameTextView, idTextView, entryTimeTextView, categoryTextView, durationTextView, priceTextView;
     private TicketViewModel ticketViewModel;
     private AppCompatButton payButton;
+    private DashboardViewModel dashboardViewModel;
 
     public String convertTime(long time){
         Date date = new Date(time);
@@ -51,6 +53,8 @@ public class VerifyPayment extends AppCompatActivity {
         durationTextView = findViewById(R.id.duration_textview);
         priceTextView = findViewById(R.id.price_textview);
         payButton = findViewById(R.id.pay_button);
+
+        dashboardViewModel = new ViewModelProvider(this).get(DashboardViewModel.class);
 
         String ticketID = null;
         // Get intent extra
@@ -81,7 +85,8 @@ public class VerifyPayment extends AppCompatActivity {
                         @Override
                         public void onClick(View view) {
 //                            Confirm Payment
-                            ticketViewModel.pay(FirebaseAuth.getInstance().getCurrentUser().getUid());
+//                            ticketViewModel.pay(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                            dashboardViewModel.pay(FirebaseAuth.getInstance().getCurrentUser().getUid());
                             Intent paymentReport = new Intent(VerifyPayment.this, PaymentReport.class);
                             paymentReport.putExtra("ticketID", finalTicketID);
                             startActivity(paymentReport);
