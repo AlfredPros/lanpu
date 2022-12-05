@@ -16,7 +16,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 
+import java.text.NumberFormat;
 import java.util.LinkedList;
+import java.util.Locale;
 import java.util.Objects;
 
 import umn.ac.id.lanpu.databinding.FragmentHomeBinding;
@@ -58,7 +60,9 @@ public class HomeFragment extends Fragment {
                 arr[0] = String.valueOf(ticket.entryTime);
                 arr[1] = String.valueOf(ticket.exitTime);
                 arr[2] = String.valueOf(ticket.ticketID);
-                arr[3] = String.valueOf(ticket.price);
+
+                NumberFormat cf = NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
+                arr[3] = cf.format(ticket.price).replace("p", "p ");
 
                 if (ticket.exitTime != null) {
                     mAdapter.addItem(arr);

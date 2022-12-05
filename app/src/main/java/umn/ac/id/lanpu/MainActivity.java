@@ -2,6 +2,7 @@ package umn.ac.id.lanpu;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         user = FirebaseAuth.getInstance().getCurrentUser();
+        assert user != null;
         if (user == null) {
             Toast.makeText(this, "Please Login First.", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(MainActivity.this, LoginActivity.class));

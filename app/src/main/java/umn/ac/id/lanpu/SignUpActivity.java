@@ -130,6 +130,7 @@ public class SignUpActivity extends AppCompatActivity {
                                         Toast.makeText(SignUpActivity.this, "Please Check email for verification.", Toast.LENGTH_LONG).show();
                                         progressBar.setVisibility(View.GONE);
 //                                                Redirect kembali ke Login
+                                        mAuth.signOut();
                                         finish();
                                     } else {
                                         progressBar.setVisibility(View.GONE);

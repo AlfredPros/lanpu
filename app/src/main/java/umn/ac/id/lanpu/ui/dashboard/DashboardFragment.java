@@ -27,10 +27,12 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 import umn.ac.id.lanpu.ProcessingActivity;
 import umn.ac.id.lanpu.R;
@@ -81,6 +83,7 @@ public class DashboardFragment extends Fragment {
         final TextView balanceTextView = binding.balanceTextview;
 
         final MaterialCardView statusCard = binding.statusCard;
+        final MaterialCardView warningdebt = binding.warningdebt;
 
         // Set Date Time
         final TextView dateText = binding.dateTextview;
@@ -143,7 +146,9 @@ public class DashboardFragment extends Fragment {
 //                    Set data to View
                     nameTextView.setText(name);
                     nimTextView.setText(FirebaseAuth.getInstance().getCurrentUser().getUid());
-                    balanceTextView.setText(("Rp " + balance));
+
+                    NumberFormat cf = NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
+                    balanceTextView.setText(cf.format(balance).replace("p", "p "));
 
                     // QR Code
                     QRCodeWriter writer = new QRCodeWriter();
@@ -162,6 +167,12 @@ public class DashboardFragment extends Fragment {
 
                     } catch (WriterException e) {
                         e.printStackTrace();
+                    }
+
+                    if (balance <= -50000) {
+                        warningdebt.setVisibility(View.VISIBLE);
+                    } else {
+                        warningdebt.setVisibility(View.GONE);
                     }
                 }
             }
