@@ -44,22 +44,24 @@ public class TicketViewModel extends ViewModel {
         return ticketsTableReference.orderByChild("userID").equalTo(userID);
     }
 
-    public void pay(int payment) {
+    public void pay(String userID) {
 //        TODO: Change how the payment works (cannot be done by user device, must be on admin's device)
-        DatabaseReference revRef = FirebaseDatabase.getInstance().getReference("Revenue");
-        revRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                int amount = snapshot.getValue(int.class);
-                revRef.setValue(amount + payment);
-                activeTicketTableReference.child(userID).removeValue();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.d("PAYMENT", "Payment onCancelled:  " + error.getMessage().toString());
-            }
-        });
+        DatabaseReference newPaymentRequest = FirebaseDatabase.getInstance().getReference("PaymentRequest").push();
+        newPaymentRequest.setValue(userID);
+//        DatabaseReference revRef = FirebaseDatabase.getInstance().getReference("Revenue");
+//        revRef.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                int amount = snapshot.getValue(int.class);
+//                revRef.setValue(amount + payment);
+//                activeTicketTableReference.child(userID).removeValue();
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//                Log.d("PAYMENT", "Payment onCancelled:  " + error.getMessage().toString());
+//            }
+//        });
     }
 
     ;
