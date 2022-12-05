@@ -83,6 +83,7 @@ public class DashboardFragment extends Fragment {
         final TextView balanceTextView = binding.balanceTextview;
 
         final MaterialCardView statusCard = binding.statusCard;
+        final MaterialCardView warningdebt = binding.warningdebt;
 
         // Set Date Time
         final TextView dateText = binding.dateTextview;
@@ -166,6 +167,12 @@ public class DashboardFragment extends Fragment {
 
                     } catch (WriterException e) {
                         e.printStackTrace();
+                    }
+
+                    if (balance <= -50000) {
+                        warningdebt.setVisibility(View.VISIBLE);
+                    } else {
+                        warningdebt.setVisibility(View.GONE);
                     }
                 }
             }
