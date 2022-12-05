@@ -85,7 +85,6 @@ public class VerifyPayment extends AppCompatActivity {
                         @Override
                         public void onClick(View view) {
 //                            Confirm Payment
-//                            ticketViewModel.pay(FirebaseAuth.getInstance().getCurrentUser().getUid());
                             dashboardViewModel.pay(FirebaseAuth.getInstance().getCurrentUser().getUid());
                             Intent paymentReport = new Intent(VerifyPayment.this, PaymentReport.class);
                             paymentReport.putExtra("ticketID", finalTicketID);
