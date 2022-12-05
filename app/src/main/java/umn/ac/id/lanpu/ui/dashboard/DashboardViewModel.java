@@ -19,9 +19,6 @@ import java.util.Objects;
 import umn.ac.id.lanpu.FirebaseQueryLiveData;
 
 public class DashboardViewModel extends ViewModel {
-//    private final MutableLiveData<Long> entryTime = new MutableLiveData<>(); //  TODO: Update data ini
-//    private final MutableLiveData<String> duration = new MutableLiveData<>();
-
     public MutableLiveData<Boolean> checker = new MutableLiveData<Boolean>();
 
     private static final DatabaseReference usersTableReference = FirebaseDatabase.getInstance().getReference("Users");
@@ -33,7 +30,6 @@ public class DashboardViewModel extends ViewModel {
         userID = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
         userReference = usersTableReference.child(userID);
         liveData = new FirebaseQueryLiveData(userReference);
-        Log.d("VIEWMODEL", userID);
         checker.setValue(false);
     }
 

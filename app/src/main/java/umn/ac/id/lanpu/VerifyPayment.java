@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 
 import java.text.Format;
@@ -76,7 +77,8 @@ public class VerifyPayment extends AppCompatActivity {
                     payButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            ticketViewModel.pay((int) ticket.price);
+//                            Confirm Payment
+                            ticketViewModel.pay(FirebaseAuth.getInstance().getCurrentUser().getUid());
                             Intent paymentReport = new Intent(VerifyPayment.this, PaymentReport.class);
                             paymentReport.putExtra("ticketID", finalTicketID);
                             startActivity(paymentReport);
