@@ -172,7 +172,7 @@ public class DashboardFragment extends Fragment {
         paymentLiveData.observe(getViewLifecycleOwner(), dataSnapshot -> {
             if (dataSnapshot.exists()) {
                 Log.d("DATASNAPSHOT", dataSnapshot.getKey().toString());
-                boolean ack = dataSnapshot.child("ack").getValue(boolean.class);
+                boolean ack = Boolean.TRUE.equals(dataSnapshot.child("ack").getValue(boolean.class));
                 Log.d("PAYMENTEXIST", String.valueOf(ack));
                 if (!ack) {
                     viewTicketDetail(LOAD_PAYMENT);
