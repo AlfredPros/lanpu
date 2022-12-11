@@ -62,7 +62,7 @@ public class DashboardFragment extends Fragment {
         dashboardViewModel =
                 new ViewModelProvider(this).get(DashboardViewModel.class);
 
-//        dashboardViewModel.getChecker().observe(getViewLifecycleOwner(), aBoolean -> checker = aBoolean);
+        dashboardViewModel.getChecker().observe(getViewLifecycleOwner(), aBoolean -> checker = aBoolean);
 
 
         binding = FragmentDashboardBinding.inflate(inflater, container, false);
@@ -216,12 +216,15 @@ public class DashboardFragment extends Fragment {
                 strDate = sdf.format(c.getTime());
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> parent of 252f716 (Semoga berhasil plz)
 =======
 >>>>>>> parent of 252f716 (Semoga berhasil plz)
 =======
                 checker = checkedIn;
 >>>>>>> parent of a646974 (Salah)
+=======
+>>>>>>> parent of 252f716 (Semoga berhasil plz)
             }
         }
     }
