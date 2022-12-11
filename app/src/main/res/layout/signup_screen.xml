@@ -45,7 +45,7 @@
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
                     android:textColor="@color/lighter_black"
-                    android:text="Your Name"/>
+                    android:text="Full Name"/>
                 <EditText
                     android:id="@+id/nameSignUp"
                     android:layout_width="match_parent"

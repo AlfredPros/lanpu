@@ -5,20 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/yellow"
-    android:padding="30dp"
     tools:context=".EntryActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/ticket_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="15sp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="10sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:strokeColor="@color/black"
-        app:strokeWidth="3dp">
+        app:strokeWidth="3dp"
+        app:cardUseCompatPadding="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -171,12 +176,13 @@
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         app:cardCornerRadius="20dp"
-        app:cardElevation="15dp"
+        app:cardElevation="10dp"
+        android:layout_marginTop="-15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ticket_card">
+        app:layout_constraintTop_toBottomOf="@+id/ticket_card"
+        app:cardUseCompatPadding="true">
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/home_page_button"
@@ -189,5 +195,6 @@
             android:textSize="18sp"
             android:textStyle="italic" />
     </androidx.cardview.widget.CardView>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

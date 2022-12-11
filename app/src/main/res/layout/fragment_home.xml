@@ -117,8 +117,8 @@
                 android:paddingLeft="28dp"
                 android:paddingRight="28dp"
                 style="@style/Widget.MaterialComponents.Button.Icon"
-                app:icon="@drawable/ic_round_refresh_24"
-                android:text="Reset"
+                app:icon="@drawable/ic_baseline_delete_24"
+                android:text="Delete"
                 android:background="@drawable/gui_reset_button"/>
 
         </TableRow>
