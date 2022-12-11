@@ -209,6 +209,9 @@ public class DashboardFragment extends Fragment {
                 c = Calendar.getInstance();
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY HH:mm:ss");
                 strDate = sdf.format(c.getTime());
+<<<<<<< HEAD
+>>>>>>> parent of 252f716 (Semoga berhasil plz)
+=======
 >>>>>>> parent of 252f716 (Semoga berhasil plz)
             }
         }
