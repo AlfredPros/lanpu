@@ -202,7 +202,14 @@ public class DashboardFragment extends Fragment {
         if (checkedIn) {
             if (!checker) { // Fire ketika hanya berubah
                 viewTicketDetail(LOAD_ENTRY);
+<<<<<<< HEAD
                 dashboardViewModel.checker.setValue(true);
+=======
+                dashboardViewModel.checker.setValue(checkedIn);
+                c = Calendar.getInstance();
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY HH:mm:ss");
+                strDate = sdf.format(c.getTime());
+>>>>>>> parent of 252f716 (Semoga berhasil plz)
             }
         }
     }
