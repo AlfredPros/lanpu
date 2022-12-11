@@ -62,7 +62,7 @@ public class DashboardFragment extends Fragment {
         dashboardViewModel =
                 new ViewModelProvider(this).get(DashboardViewModel.class);
 
-//        dashboardViewModel.getChecker().observe(getViewLifecycleOwner(), aBoolean -> checker = aBoolean);
+        dashboardViewModel.getChecker().observe(getViewLifecycleOwner(), aBoolean -> checker = aBoolean);
 
 
         binding = FragmentDashboardBinding.inflate(inflater, container, false);
@@ -195,21 +195,16 @@ public class DashboardFragment extends Fragment {
     }
 
     public void changeStatus(boolean checkedIn) {
-        if (checkedIn) {
-            if (checkedIn != checker) { // Fire ketika hanya berubah
-                viewTicketDetail(LOAD_ENTRY);
-                dashboardViewModel.checker.setValue(checkedIn);
-                c = Calendar.getInstance();
-                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY HH:mm:ss");
-                strDate = sdf.format(c.getTime());
-                checker = checkedIn;
-            }
-        }
+//        if (checkedIn != checker) {
+//
+//        }
+
+        viewTicketDetail(LOAD_ENTRY);
+//        dashboardViewModel.checker.setValue(checkedIn);
     }
 
 
     public void viewTicketDetail(int loadMode) {
-        String processingTitle =  loadMode < 1 ? "Finding Ticket" : "Checking In";
         Intent getTicket = new Intent(getActivity(), ProcessingActivity.class);
         getTicket.putExtra("processingTitle", "Finding Ticket");
         getTicket.putExtra("loadMode", loadMode);
