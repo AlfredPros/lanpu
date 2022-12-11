@@ -174,7 +174,7 @@ public class DashboardFragment extends Fragment {
                 Log.d("DATASNAPSHOT", dataSnapshot.getKey().toString());
                 boolean ack = Boolean.TRUE.equals(dataSnapshot.child("ack").getValue(boolean.class));
                 Log.d("PAYMENTEXIST", String.valueOf(ack));
-                if (!ack) {
+                if (ack) {
                     viewTicketDetail(LOAD_PAYMENT);
                 }
             }
