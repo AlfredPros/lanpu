@@ -199,19 +199,9 @@ public class DashboardFragment extends Fragment {
     }
 
     public void changeStatus(boolean checkedIn) {
-        if (checkedIn) {
-            if (!checker) { // Fire ketika hanya berubah
-                viewTicketDetail(LOAD_ENTRY);
-                dashboardViewModel.checker.setValue(true);
-                if (checkedIn != checker) { // Fire ketika hanya berubah
-                    viewTicketDetail(LOAD_ENTRY);
-                    dashboardViewModel.checker.setValue(checkedIn);
-                    c = Calendar.getInstance();
-                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY HH:mm:ss");
-                    strDate = sdf.format(c.getTime());
-                    checker = checkedIn;
-                }
-            }
+        if (checkedIn && !checker) { // Fire ketika hanya berubah
+            viewTicketDetail(LOAD_ENTRY);
+            dashboardViewModel.checker.setValue(checkedIn);
         }
     }
 
