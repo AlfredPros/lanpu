@@ -183,6 +183,7 @@ public class DashboardFragment extends Fragment {
                 binding.statusCard.setCardBackgroundColor(getResources().getColor(R.color.green));
             else
                 binding.statusCard.setCardBackgroundColor(getResources().getColor(R.color.red));
+            dashboardViewModel.checker.setValue(false);
         });
         return root;
 
@@ -195,12 +196,10 @@ public class DashboardFragment extends Fragment {
     }
 
     public void changeStatus(boolean checkedIn) {
-//        if (checkedIn != checker) {
-//
-//        }
-
-        viewTicketDetail(LOAD_ENTRY);
-//        dashboardViewModel.checker.setValue(checkedIn);
+        if (checker == true) { // Kalau payment report  belum dicek
+            viewTicketDetail(LOAD_ENTRY); // Jalankan activity untuk ngecek report
+            dashboardViewModel.checker.setValue(true);
+        }
     }
 
 
