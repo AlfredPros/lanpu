@@ -208,6 +208,7 @@ public class DashboardFragment extends Fragment {
 
 
     public void viewTicketDetail(int loadMode) {
+        String processingTitle =  loadMode < 1 ? "Finding Ticket" : "Checking In";
         Intent getTicket = new Intent(getActivity(), ProcessingActivity.class);
         getTicket.putExtra("processingTitle", "Finding Ticket");
         getTicket.putExtra("loadMode", loadMode);
