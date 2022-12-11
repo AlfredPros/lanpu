@@ -171,7 +171,11 @@ public class DashboardFragment extends Fragment {
         LiveData<DataSnapshot> paymentLiveData = dashboardViewModel.getPaymentRequestLiveData(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid());
         paymentLiveData.observe(getViewLifecycleOwner(), dataSnapshot -> {
             if (dataSnapshot.exists()) {
-                viewTicketDetail(LOAD_PAYMENT);
+                boolean ack = dataSnapshot.child("ack").getValue(boolean.class);
+                Log.d("PAYMENTEXIST", String.valueOf(ack));
+                if (!ack) {
+                    viewTicketDetail(LOAD_PAYMENT);
+                }
             }
         });
 
@@ -183,7 +187,6 @@ public class DashboardFragment extends Fragment {
                 binding.statusCard.setCardBackgroundColor(getResources().getColor(R.color.green));
             else
                 binding.statusCard.setCardBackgroundColor(getResources().getColor(R.color.red));
-            dashboardViewModel.checker.setValue(false);
         });
         return root;
 
@@ -196,9 +199,11 @@ public class DashboardFragment extends Fragment {
     }
 
     public void changeStatus(boolean checkedIn) {
-        if (checker == true) { // Kalau payment report  belum dicek
-            viewTicketDetail(LOAD_ENTRY); // Jalankan activity untuk ngecek report
-            dashboardViewModel.checker.setValue(true);
+        if (checkedIn) {
+            if (!checker) { // Fire ketika hanya berubah
+                viewTicketDetail(LOAD_ENTRY);
+                dashboardViewModel.checker.setValue(true);
+            }
         }
     }
 
