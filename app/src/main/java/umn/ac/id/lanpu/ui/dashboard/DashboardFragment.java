@@ -62,7 +62,7 @@ public class DashboardFragment extends Fragment {
         dashboardViewModel =
                 new ViewModelProvider(this).get(DashboardViewModel.class);
 
-        dashboardViewModel.getChecker().observe(getViewLifecycleOwner(), aBoolean -> checker = aBoolean);
+//        dashboardViewModel.getChecker().observe(getViewLifecycleOwner(), aBoolean -> checker = aBoolean);
 
 
         binding = FragmentDashboardBinding.inflate(inflater, container, false);
@@ -202,6 +202,7 @@ public class DashboardFragment extends Fragment {
                 c = Calendar.getInstance();
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY HH:mm:ss");
                 strDate = sdf.format(c.getTime());
+                checker = checkedIn;
             }
         }
     }
