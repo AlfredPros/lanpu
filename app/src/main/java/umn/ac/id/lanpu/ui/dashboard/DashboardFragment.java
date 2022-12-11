@@ -200,35 +200,20 @@ public class DashboardFragment extends Fragment {
 
     public void changeStatus(boolean checkedIn) {
         if (checkedIn) {
-<<<<<<< HEAD
             if (!checker) { // Fire ketika hanya berubah
                 viewTicketDetail(LOAD_ENTRY);
-<<<<<<< HEAD
                 dashboardViewModel.checker.setValue(true);
-=======
-=======
-            if (checkedIn != checker) { // Fire ketika hanya berubah
-                viewTicketDetail(LOAD_ENTRY);
->>>>>>> parent of a646974 (Salah)
-                dashboardViewModel.checker.setValue(checkedIn);
-                c = Calendar.getInstance();
-                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY HH:mm:ss");
-                strDate = sdf.format(c.getTime());
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> parent of 252f716 (Semoga berhasil plz)
-=======
->>>>>>> parent of 252f716 (Semoga berhasil plz)
-=======
-                checker = checkedIn;
->>>>>>> parent of a646974 (Salah)
-=======
->>>>>>> parent of 252f716 (Semoga berhasil plz)
+                if (checkedIn != checker) { // Fire ketika hanya berubah
+                    viewTicketDetail(LOAD_ENTRY);
+                    dashboardViewModel.checker.setValue(checkedIn);
+                    c = Calendar.getInstance();
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY HH:mm:ss");
+                    strDate = sdf.format(c.getTime());
+                    checker = checkedIn;
+                }
             }
         }
     }
-
 
     public void viewTicketDetail(int loadMode) {
         String processingTitle =  loadMode < 1 ? "Finding Ticket" : "Checking In";
