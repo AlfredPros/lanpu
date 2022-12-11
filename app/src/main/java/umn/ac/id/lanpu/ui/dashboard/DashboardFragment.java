@@ -18,6 +18,8 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.card.MaterialCardView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -172,11 +174,17 @@ public class DashboardFragment extends Fragment {
         paymentLiveData.observe(getViewLifecycleOwner(), dataSnapshot -> {
             if (dataSnapshot.exists()) {
                 Log.d("DATASNAPSHOT", dataSnapshot.getKey().toString());
-                boolean ack = Boolean.TRUE.equals(dataSnapshot.child("ack").getValue(boolean.class));
-                Log.d("PAYMENTEXIST", String.valueOf(ack));
-                if (!ack) {
-                    viewTicketDetail(LOAD_PAYMENT);
-                }
+                dataSnapshot.getRef().child("ack").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                        boolean ack = task.getResult().getValue(boolean.class);
+                        Log.d("PAYMENTEXIST", String.valueOf(ack));
+                        if (!ack) {
+                            viewTicketDetail(LOAD_PAYMENT);
+                        }
+                    }
+                });
+
             }
         });
 
