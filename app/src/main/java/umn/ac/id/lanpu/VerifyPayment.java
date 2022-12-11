@@ -65,36 +65,41 @@ public class VerifyPayment extends AppCompatActivity {
 
         ticketViewModel = new ViewModelProvider(this).get(TicketViewModel.class);
         String finalTicketID = ticketID;
-        ticketViewModel.getTicket(ticketID).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DataSnapshot> task) {
-                if (!task.isSuccessful()) {
-                    Log.e("firebase", "Error getting data", task.getException());
-                } else {
-                    Ticket ticket = task.getResult().getValue(Ticket.class);
-                    Log.d("FINALTICKETID", finalTicketID);
-                    ticketNumberTextView.setText(finalTicketID);
-                    nameTextView.setText(ticket.name);
-                    idTextView.setText(ticket.userID);
-                    entryTimeTextView.setText(ticket.entryTime);
-                    durationTextView.setText(findDifference(ticket.entryTime, ticket.exitTime));
-                    NumberFormat cf = NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
-                    priceTextView.setText(cf.format(ticket.price).replace("p", "p "));
-                    categoryTextView.setText(ticket.category);
-                    payButton.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-//                            Confirm Payment
-                            dashboardViewModel.pay(FirebaseAuth.getInstance().getCurrentUser().getUid());
-                            Intent paymentReport = new Intent(VerifyPayment.this, PaymentReport.class);
-                            paymentReport.putExtra("ticketID", finalTicketID);
-                            startActivity(paymentReport);
-                            finish();
-                        }
-                    });
+        if (ticketID != null) {
+            ticketViewModel.getTicket(ticketID).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DataSnapshot> task) {
+                    if (!task.isSuccessful()) {
+                        Log.e("firebase", "Error getting data", task.getException());
+                    } else {
+                        Ticket ticket = task.getResult().getValue(Ticket.class);
+                        Log.d("FINALTICKETID", finalTicketID);
+                        ticketNumberTextView.setText(finalTicketID);
+                        nameTextView.setText(ticket.name);
+                        idTextView.setText(ticket.userID);
+                        entryTimeTextView.setText(ticket.entryTime);
+                        durationTextView.setText(findDifference(ticket.entryTime, ticket.exitTime));
+                        NumberFormat cf = NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
+                        priceTextView.setText(cf.format(ticket.price).replace("p", "p "));
+                        categoryTextView.setText(ticket.category);
+                        payButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+    //                            Confirm Payment
+                                dashboardViewModel.pay(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                                Intent paymentReport = new Intent(VerifyPayment.this, PaymentReport.class);
+                                paymentReport.putExtra("ticketID", finalTicketID);
+                                startActivity(paymentReport);
+                                finish();
+                            }
+                        });
+                    }
                 }
-            }
-        });
+            });
+        }
+        else {
+            finish();
+        };
     }
 
     static String findDifference(String start_date, String end_date) {

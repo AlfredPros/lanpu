@@ -192,10 +192,14 @@ public class DashboardFragment extends Fragment {
         statusLiveData.observe(getViewLifecycleOwner(), dataSnapshot -> {
             boolean checkedIn = dataSnapshot.getValue(boolean.class);
             changeStatus(checkedIn);
-            if (checkedIn)
+            if (checkedIn) {
                 binding.statusCard.setCardBackgroundColor(getResources().getColor(R.color.green));
-            else
+                dashboardViewModel.checker.setValue(true);
+            }
+            else {
                 binding.statusCard.setCardBackgroundColor(getResources().getColor(R.color.red));
+                dashboardViewModel.checker.setValue(false);
+            }
         });
         return root;
 
@@ -210,7 +214,7 @@ public class DashboardFragment extends Fragment {
     public void changeStatus(boolean checkedIn) {
         if (checkedIn && !checker) { // Fire ketika hanya berubah
             viewTicketDetail(LOAD_ENTRY);
-            dashboardViewModel.checker.setValue(checkedIn);
+            dashboardViewModel.checker.setValue(true);
         }
     }
 
