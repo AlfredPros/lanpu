@@ -173,18 +173,7 @@ public class DashboardFragment extends Fragment {
         LiveData<DataSnapshot> paymentLiveData = dashboardViewModel.getPaymentRequestLiveData(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid());
         paymentLiveData.observe(getViewLifecycleOwner(), dataSnapshot -> {
             if (dataSnapshot.exists()) {
-                Log.d("DATASNAPSHOT", dataSnapshot.getKey().toString());
-                dataSnapshot.getRef().child("ack").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DataSnapshot> task) {
-                        boolean ack = task.getResult().getValue(boolean.class);
-                        Log.d("PAYMENTEXIST", String.valueOf(ack));
-                        if (!ack) {
-                            viewTicketDetail(LOAD_PAYMENT);
-                        }
-                    }
-                });
-
+                viewTicketDetail(LOAD_PAYMENT);
             }
         });
 
