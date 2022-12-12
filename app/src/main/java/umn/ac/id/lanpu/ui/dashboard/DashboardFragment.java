@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -55,8 +56,6 @@ public class DashboardFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-
-
         dashboardViewModel =
                 new ViewModelProvider(this).get(DashboardViewModel.class);
 
@@ -123,6 +122,7 @@ public class DashboardFragment extends Fragment {
 //                    Get data
                 String name = dataSnapshot.child("name").getValue(String.class);
                 int balance = dataSnapshot.child("balance").getValue(int.class);
+                dashboardViewModel.balance.setValue(balance);
                 entryTime = dataSnapshot.child("entryTime").getValue(String.class);
 
 //                    Set data to View
@@ -162,7 +162,11 @@ public class DashboardFragment extends Fragment {
         LiveData<DataSnapshot> paymentLiveData = dashboardViewModel.getPaymentRequestLiveData(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid());
         paymentLiveData.observe(getViewLifecycleOwner(), dataSnapshot -> {
             if (dataSnapshot.exists()) {
-                viewTicketDetail(LOAD_PAYMENT);
+                if (dashboardViewModel.getBalance().getValue() > -50000)  viewTicketDetail(LOAD_PAYMENT);
+                else {
+                    warningToast();
+                    dashboardViewModel.pay(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid(), false);
+                }
             }
         });
 
@@ -202,6 +206,11 @@ public class DashboardFragment extends Fragment {
         getTicket.putExtra("processingTitle", "Finding Ticket");
         getTicket.putExtra("loadMode", loadMode);
         startActivity(getTicket);
+    }
+
+    public void warningToast(){
+        Toast.makeText(getContext(), "Payment cannot be displayed! Please Top up.", Toast.LENGTH_SHORT).show();
+        return;
     }
 
 

@@ -26,6 +26,9 @@ public class DashboardViewModel extends ViewModel {
     private static DatabaseReference userReference;
     private static FirebaseQueryLiveData liveData;
 
+    public MutableLiveData<Integer> balance = new MutableLiveData<>();
+
+
     public DashboardViewModel() {
         userID = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
         userReference = usersTableReference.child(userID);
@@ -41,13 +44,17 @@ public class DashboardViewModel extends ViewModel {
         return new FirebaseQueryLiveData(userReference.child("checkedIn"));
     }
 
-    public void pay(String userID) {
+    public void pay(String userID, boolean ack) {
 //        TODO: Change how the payment works (cannot be done by user device, must be on admin's device)
-        paymentRequestTableReference.child(userID).child("ack").setValue(true);
+        paymentRequestTableReference.child(userID).child("ack").setValue(ack);
     }
 
     public LiveData<Boolean> getChecker() {
         return checker;
+    }
+
+    public LiveData<Integer> getBalance() {
+        return balance;
     }
 
     public FirebaseQueryLiveData getPaymentRequestLiveData(String userID) {

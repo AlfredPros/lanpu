@@ -72,6 +72,7 @@ public class VerifyPayment extends AppCompatActivity {
                     NumberFormat cf = NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
                     priceTextView.setText(cf.format(ticket.price).replace("p", "p "));
                     categoryTextView.setText(ticket.category);
+//                    TODO: Kalau mau bisa tambahkan cancel payment button tinggal pakai dashboardViewmodel.pay(userID, false)
                     payButton.setOnClickListener(view -> {
 //                                Menghindari Double Clicked
                         if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
@@ -80,7 +81,7 @@ public class VerifyPayment extends AppCompatActivity {
                         mLastClickTime = SystemClock.elapsedRealtime();
 
                         //                            Confirm Payment
-                        dashboardViewModel.pay(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid());
+                        dashboardViewModel.pay(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid(), true);
                         Intent paymentReport = new Intent(VerifyPayment.this, PaymentReport.class);
                         paymentReport.putExtra("ticketID", finalTicketID);
                         startActivity(paymentReport);
