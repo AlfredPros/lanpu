@@ -1,5 +1,6 @@
 package umn.ac.id.lanpu;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
@@ -10,16 +11,15 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Objects;
 
 public class SignUpActivity extends AppCompatActivity {
-    private Button signUpButtonInSignUp;
     private EditText nameSignUp, emailSignUp, passwordSignUp1, passwordSignUp2;
     private ProgressBar progressBar;
     private FirebaseAuth mAuth;
@@ -39,7 +39,7 @@ public class SignUpActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.signUpProgressBar);
 
 
-        signUpButtonInSignUp = findViewById(R.id.signUpButtonInSignUp);
+        Button signUpButtonInSignUp = findViewById(R.id.signUpButtonInSignUp);
 
         signUpButtonInSignUp.setOnClickListener(view -> {
 //                Intent intentToSignIn = new Intent(SignUpActivity.this, LoginActivity.class);
@@ -52,12 +52,6 @@ public class SignUpActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        updateUI(currentUser);
-    }
-
-    private void updateUI(FirebaseUser currentUser) {
     }
 
     private void signUpUser() {
@@ -66,7 +60,7 @@ public class SignUpActivity extends AppCompatActivity {
         String password1 = passwordSignUp1.getText().toString().trim();
         String password2 = passwordSignUp2.getText().toString().trim();
 
-        progressBar.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.GONE);
 
         //    Validasi Input
         if (name.isEmpty()) {
@@ -126,11 +120,13 @@ public class SignUpActivity extends AppCompatActivity {
                                 .child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid())
                                 .setValue(user).addOnCompleteListener(task1 -> {
                                     if (task1.isSuccessful()) {
-                                        mAuth.getCurrentUser().sendEmailVerification();
+                                        Objects.requireNonNull(mAuth.getCurrentUser()).sendEmailVerification();
                                         Toast.makeText(SignUpActivity.this, "Please Check email for verification.", Toast.LENGTH_LONG).show();
                                         progressBar.setVisibility(View.GONE);
 //                                                Redirect kembali ke Login
                                         mAuth.signOut();
+                                        Intent intentLoginInSignUp = new Intent(SignUpActivity.this, LoginActivity.class);
+                                        startActivity(intentLoginInSignUp);
                                         finish();
                                     } else {
                                         progressBar.setVisibility(View.GONE);
@@ -148,5 +144,38 @@ public class SignUpActivity extends AppCompatActivity {
         Intent intentLoginInSignUp = new Intent(SignUpActivity.this, LoginActivity.class);
         startActivity(intentLoginInSignUp);
         finish();
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        // Create the object of AlertDialog Builder class
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        // Set the message show for the Alert time
+        builder.setMessage("Do you want to exit ?");
+
+        // Set Alert Title
+        builder.setTitle("Exiting Lanpu");
+
+        // Set Cancelable false for when the user clicks on the outside the Dialog Box then it will remain show
+        builder.setCancelable(false);
+
+        // Set the positive button with yes name Lambda OnClickListener method is use of DialogInterface interface.
+        builder.setPositiveButton("Yes", (DialogInterface.OnClickListener) (dialog, which) -> {
+            // When the user click yes button then app will close
+            finish();
+        });
+
+        // Set the Negative button with No name Lambda OnClickListener method is use of DialogInterface interface.
+        builder.setNegativeButton("No", (DialogInterface.OnClickListener) (dialog, which) -> {
+            // If user click no then dialog box is canceled.
+            dialog.cancel();
+        });
+
+        // Create the Alert dialog
+        AlertDialog alertDialog = builder.create();
+        // Show the Alert Dialog box
+        alertDialog.show();
     }
 }
