@@ -1,5 +1,6 @@
 package umn.ac.id.lanpu.ui.dashboard;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -15,11 +16,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.card.MaterialCardView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -53,8 +51,6 @@ public class DashboardFragment extends Fragment {
 
     private String entryTime;
 
-    // Digunakan untuk menentukan Activity mana yang akan diload.
-    private final int LOAD_ENTRY = 0;
     private final int LOAD_PAYMENT = 1;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -77,7 +73,6 @@ public class DashboardFragment extends Fragment {
         final TextView durationTextView = binding.durationTextview;
         final TextView balanceTextView = binding.balanceTextview;
 
-        final MaterialCardView statusCard = binding.statusCard;
         final MaterialCardView warningdebt = binding.warningdebt;
 
         // Set Date Time
@@ -100,8 +95,6 @@ public class DashboardFragment extends Fragment {
 
                     durationTextView.setText("");
                 } else {
-//                    statusCard.setCardBackgroundColor(getResources().getColor(R.color.green));
-
                     c = Calendar.getInstance();
                     SimpleDateFormat sdf = new SimpleDateFormat("EEEE, MMMM d, yyyy");
                     strDate = sdf.format(c.getTime());
@@ -127,14 +120,10 @@ public class DashboardFragment extends Fragment {
 
             if (dataSnapshot != null) {
 //                    Updata UI ketika terjadi perubahan dalam User
-
 //                    Get data
                 String name = dataSnapshot.child("name").getValue(String.class);
-//                    String uid = dataSnapshot.getValue(String.class);
                 int balance = dataSnapshot.child("balance").getValue(int.class);
                 entryTime = dataSnapshot.child("entryTime").getValue(String.class);
-//                    if (entryTime != null) mHandler.post(durationRunnable);
-//                    else mHandler.post(mRunnable);
 
 //                    Set data to View
                 nameTextView.setText(name);
@@ -179,16 +168,15 @@ public class DashboardFragment extends Fragment {
 
         LiveData<DataSnapshot> statusLiveData = dashboardViewModel.getStatusLiveData();
         statusLiveData.observe(getViewLifecycleOwner(), dataSnapshot -> {
-            boolean checkedIn = dataSnapshot.getValue(boolean.class);
+            boolean checkedIn = Boolean.TRUE.equals(dataSnapshot.getValue(boolean.class));
             changeStatus(checkedIn);
             if (checkedIn) {
                 binding.statusCard.setCardBackgroundColor(getResources().getColor(R.color.green));
-                dashboardViewModel.checker.setValue(true);
-            }
-            else {
+            } else {
                 binding.statusCard.setCardBackgroundColor(getResources().getColor(R.color.red));
-                dashboardViewModel.checker.setValue(false);
+
             }
+            dashboardViewModel.checker.setValue(checkedIn);
         });
         return root;
 
@@ -202,13 +190,14 @@ public class DashboardFragment extends Fragment {
 
     public void changeStatus(boolean checkedIn) {
         if (checkedIn && !checker) { // Fire ketika hanya berubah
+            // Digunakan untuk menentukan Activity mana yang akan diload.
+            int LOAD_ENTRY = 0;
             viewTicketDetail(LOAD_ENTRY);
             dashboardViewModel.checker.setValue(true);
         }
     }
 
     public void viewTicketDetail(int loadMode) {
-        String processingTitle =  loadMode < 1 ? "Finding Ticket" : "Checking In";
         Intent getTicket = new Intent(getActivity(), ProcessingActivity.class);
         getTicket.putExtra("processingTitle", "Finding Ticket");
         getTicket.putExtra("loadMode", loadMode);
@@ -217,12 +206,14 @@ public class DashboardFragment extends Fragment {
 
 
     static String findDifference(String start_date, String end_date) {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
         try {
             Date d1 = sdf.parse(start_date);
             Date d2 = sdf.parse(end_date);
 
+            assert d2 != null;
+            assert d1 != null;
             long difference_In_Time = d2.getTime() - d1.getTime();
 
             long difference_In_Seconds = (difference_In_Time / 1000) % 60;
@@ -230,10 +221,6 @@ public class DashboardFragment extends Fragment {
             long difference_In_Minutes = (difference_In_Time / (1000 * 60)) % 60;
 
             long difference_In_Hours = (difference_In_Time / (1000 * 60 * 60)) % 24;
-
-            long difference_In_Years = (difference_In_Time / (1000l * 60 * 60 * 24 * 365));
-
-            long difference_In_Days = (difference_In_Time / (1000 * 60 * 60 * 24)) % 365;
 
             return (difference_In_Hours + " hours "
                     + difference_In_Minutes + " mins "
