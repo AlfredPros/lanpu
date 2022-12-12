@@ -1,27 +1,24 @@
 package umn.ac.id.lanpu;
 
-import androidx.annotation.NonNull;
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.SystemClock;
+import android.util.Log;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.TextView;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
 
-import java.text.Format;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Objects;
 
 import umn.ac.id.lanpu.ui.dashboard.DashboardViewModel;
 import umn.ac.id.lanpu.ui.dashboard.Ticket;
@@ -30,15 +27,9 @@ import umn.ac.id.lanpu.ui.dashboard.TicketViewModel;
 public class VerifyPayment extends AppCompatActivity {
 
     private TextView ticketNumberTextView, nameTextView, idTextView, entryTimeTextView, categoryTextView, durationTextView, priceTextView;
-    private TicketViewModel ticketViewModel;
     private AppCompatButton payButton;
     private DashboardViewModel dashboardViewModel;
-
-    public String convertTime(long time){
-        Date date = new Date(time);
-        Format format = new SimpleDateFormat("yyyy MM dd HH:mm:ss");
-        return format.format(date);
-    }
+    private long mLastClickTime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,52 +54,54 @@ public class VerifyPayment extends AppCompatActivity {
             ticketID = extras.getString("ticketID");
         }
 
-        ticketViewModel = new ViewModelProvider(this).get(TicketViewModel.class);
+        TicketViewModel ticketViewModel = new ViewModelProvider(this).get(TicketViewModel.class);
         String finalTicketID = ticketID;
         if (ticketID != null) {
-            ticketViewModel.getTicket(ticketID).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<DataSnapshot> task) {
-                    if (!task.isSuccessful()) {
-                        Log.e("firebase", "Error getting data", task.getException());
-                    } else {
-                        Ticket ticket = task.getResult().getValue(Ticket.class);
-                        Log.d("FINALTICKETID", finalTicketID);
-                        ticketNumberTextView.setText(finalTicketID);
-                        nameTextView.setText(ticket.name);
-                        idTextView.setText(ticket.userID);
-                        entryTimeTextView.setText(ticket.entryTime);
-                        durationTextView.setText(findDifference(ticket.entryTime, ticket.exitTime));
-                        NumberFormat cf = NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
-                        priceTextView.setText(cf.format(ticket.price).replace("p", "p "));
-                        categoryTextView.setText(ticket.category);
-                        payButton.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-    //                            Confirm Payment
-                                dashboardViewModel.pay(FirebaseAuth.getInstance().getCurrentUser().getUid());
-                                Intent paymentReport = new Intent(VerifyPayment.this, PaymentReport.class);
-                                paymentReport.putExtra("ticketID", finalTicketID);
-                                startActivity(paymentReport);
-                                finish();
-                            }
-                        });
-                    }
+            ticketViewModel.getTicket(ticketID).get().addOnCompleteListener(task -> {
+                if (!task.isSuccessful()) {
+                    Log.e("firebase", "Error getting data", task.getException());
+                } else {
+                    Ticket ticket = task.getResult().getValue(Ticket.class);
+                    Log.d("FINALTICKETID", finalTicketID);
+                    ticketNumberTextView.setText(finalTicketID);
+                    assert ticket != null;
+                    nameTextView.setText(ticket.name);
+                    idTextView.setText(ticket.userID);
+                    entryTimeTextView.setText(ticket.entryTime);
+                    durationTextView.setText(findDifference(ticket.entryTime, ticket.exitTime));
+                    NumberFormat cf = NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
+                    priceTextView.setText(cf.format(ticket.price).replace("p", "p "));
+                    categoryTextView.setText(ticket.category);
+                    payButton.setOnClickListener(view -> {
+//                                Menghindari Double Clicked
+                        if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
+                            return;
+                        }
+                        mLastClickTime = SystemClock.elapsedRealtime();
+
+                        //                            Confirm Payment
+                        dashboardViewModel.pay(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid());
+                        Intent paymentReport = new Intent(VerifyPayment.this, PaymentReport.class);
+                        paymentReport.putExtra("ticketID", finalTicketID);
+                        startActivity(paymentReport);
+                        finish();
+                    });
                 }
             });
-        }
-        else {
+        } else {
             finish();
-        };
+        }
     }
 
     static String findDifference(String start_date, String end_date) {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
         try {
             Date d1 = sdf.parse(start_date);
             Date d2 = sdf.parse(end_date);
 
+            assert d2 != null;
+            assert d1 != null;
             long difference_In_Time = d2.getTime() - d1.getTime();
 
             long difference_In_Seconds = (difference_In_Time / 1000) % 60;
@@ -117,16 +110,11 @@ public class VerifyPayment extends AppCompatActivity {
 
             long difference_In_Hours = (difference_In_Time / (1000 * 60 * 60)) % 24;
 
-            long difference_In_Years = (difference_In_Time / (1000l * 60 * 60 * 24 * 365));
-
-            long difference_In_Days = (difference_In_Time / (1000 * 60 * 60 * 24)) % 365;
-
             return (difference_In_Hours + " hours "
                     + difference_In_Minutes + " mins "
                     + difference_In_Seconds + " secs");
 
-        }
-        catch (ParseException e) {
+        } catch (ParseException e) {
             e.printStackTrace();
         }
 
