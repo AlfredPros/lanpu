@@ -55,6 +55,39 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <Button
+                android:id="@+id/history_from_date"
+                android:layout_width="wrap_content"
+                android:layout_height="46dp"
+                android:layout_weight="1"
+                android:text="HH/BB/TTTT"
+                android:textColor="@color/white"
+                android:popupBackground="@color/white"
+                android:popupTheme="@android:style/ThemeOverlay.Material.Dark"
+                android:paddingLeft="16dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginBottom="12dp"
+                style="@style/Widget.AppCompat.TextView.SpinnerItem"
+                android:background="@drawable/gui_date_input" />
+
+            <Button
+                android:id="@+id/history_to_date"
+                android:layout_width="wrap_content"
+                android:layout_height="46dp"
+                android:layout_weight="1"
+                android:text="HH/BB/TTTT"
+                android:textColor="@color/white"
+                android:popupBackground="@color/white"
+                android:popupTheme="@android:style/ThemeOverlay.Material.Dark"
+                android:paddingLeft="16dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginBottom="12dp"
+                style="@style/Widget.AppCompat.TextView.SpinnerItem"
+                android:background="@drawable/gui_date_input" />
+
+            <!--
             <EditText
                 android:id="@+id/history_from_date"
                 android:layout_width="wrap_content"
@@ -69,7 +102,8 @@
                 android:layout_marginEnd="4dp"
                 android:layout_marginBottom="12dp"
                 android:background="@drawable/gui_date_input"/>
-
+            -->
+            <!--
             <EditText
                 android:id="@+id/history_to_date"
                 android:layout_width="wrap_content"
@@ -84,7 +118,7 @@
                 android:layout_marginEnd="4dp"
                 android:layout_marginBottom="12dp"
                 android:background="@drawable/gui_date_input"/>
-
+            -->
         </TableRow>
 
         <TableRow

@@ -1,9 +1,13 @@
 package umn.ac.id.lanpu.ui.home;
 
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,6 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 
 import java.text.NumberFormat;
+import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.Locale;
 import java.util.Objects;
@@ -30,6 +35,8 @@ public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
 
     private final LinkedList<String[]> mHistoryList = new LinkedList<>();
+    private DatePickerDialog datePickerDialogFrom;
+    private DatePickerDialog datePickerDialogTo;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -39,6 +46,17 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        // Date Picker
+        initDatePickerFrom(inflater);
+        binding.historyFromDate.setText(getTodaysDate());
+        binding.historyFromDate.setOnClickListener(v -> {
+            openDatePickerFrom(v);
+        });
+        initDatePickerTo(inflater);
+        binding.historyToDate.setText(getTodaysDate());
+        binding.historyToDate.setOnClickListener(v -> {
+            openDatePickerTo(v);
+        });
 
         RecyclerView mRecyclerView = binding.recyclerHistory;
         HistoryAdapter mAdapter = new HistoryAdapter(inflater.getContext(), mHistoryList);
@@ -97,5 +115,78 @@ public class HomeFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    private String getTodaysDate()
+    {
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+        month = month + 1;
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+        return makeDateString(day, month, year);
+    }
+
+    private String makeDateString(int day, int month, int year)
+    {
+        return day + "/" + month + "/" + year;
+    }
+
+    private void initDatePickerFrom(@NonNull LayoutInflater inflater)
+    {
+        DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener()
+        {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day)
+            {
+                month = month + 1;
+                String date = makeDateString(day, month, year);
+                binding.historyFromDate.setText(date);
+            }
+        };
+
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+
+        int style = AlertDialog.THEME_HOLO_LIGHT;
+
+        datePickerDialogFrom = new DatePickerDialog(inflater.getContext(), style, dateSetListener, year, month, day);
+        datePickerDialogFrom.getDatePicker().setMaxDate(System.currentTimeMillis());
+
+    }
+    public void openDatePickerFrom(View view)
+    {
+        datePickerDialogFrom.show();
+    }
+
+    private void initDatePickerTo(@NonNull LayoutInflater inflater)
+    {
+        DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener()
+        {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day)
+            {
+                month = month + 1;
+                String date = makeDateString(day, month, year);
+                binding.historyToDate.setText(date);
+            }
+        };
+
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+
+        int style = AlertDialog.THEME_HOLO_LIGHT;
+
+        datePickerDialogTo = new DatePickerDialog(inflater.getContext(), style, dateSetListener, year, month, day);
+        datePickerDialogTo.getDatePicker().setMaxDate(System.currentTimeMillis());
+
+    }
+    public void openDatePickerTo(View view)
+    {
+        datePickerDialogTo.show();
     }
 }
