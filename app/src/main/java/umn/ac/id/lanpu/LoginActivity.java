@@ -78,6 +78,7 @@ public class LoginActivity extends AppCompatActivity {
                     // Redirect ke Home Page
                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     Log.e("LOGIN", "SUCCESS");
+                    finish();
                 } else {
                     user.sendEmailVerification();
                     Toast.makeText(LoginActivity.this, "User has not been verified. Please Check email for verification.", Toast.LENGTH_LONG).show();
@@ -97,6 +98,7 @@ public class LoginActivity extends AppCompatActivity {
         if (user != null) {
             Toast.makeText(this, "Welcome Back.", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            finish();
         }
     }
 
