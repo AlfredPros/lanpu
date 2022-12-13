@@ -16,7 +16,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="24dp"
+            android:paddingHorizontal="24dp"
+            android:paddingVertical="36dp"
             android:background="@color/lighter_black">
             <ImageView
                 android:id="@+id/account_icon"
@@ -41,8 +42,17 @@
         android:layout_height="wrap_content"
         android:padding="18dp"
         android:orientation="vertical">
+        <!--        <TextView-->
+        <!--            android:id="@+id/account_change_password"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:inputType="textPersonName"-->
+        <!--            android:text="Change Password"-->
+        <!--            android:textColor="@color/lighter_black"-->
+        <!--            android:textSize="20sp"-->
+        <!--            tools:ignore="TouchTargetSizeCheck"-->
+        <!--            android:layout_marginBottom="8dp" />-->
         <LinearLayout
-            android:id="@+id/account_change_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/gui_button_text_white"
@@ -50,6 +60,7 @@
             android:layout_marginTop="4dp"
             android:orientation="vertical">
             <TextView
+                android:id="@+id/account_change_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
@@ -59,26 +70,25 @@
                 android:textColor="@color/lighter_black"
                 android:textSize="18dp"/>
         </LinearLayout>
-        <LinearLayout
-            android:id="@+id/account_notification"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/gui_button_text_white"
-            android:padding="12dp"
-            android:layout_marginTop="4dp"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Notification Setting"
-                android:textAlignment="center"
-                android:textStyle="italic"
-                android:textColor="@color/lighter_black"
-                android:textSize="18dp"/>
-        </LinearLayout>
+<!--        <LinearLayout-->
+<!--            android:id="@+id/account_notification"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="@drawable/gui_button_text_white"-->
+<!--            android:padding="12dp"-->
+<!--            android:layout_marginTop="4dp"-->
+<!--            android:orientation="vertical">-->
+<!--            <TextView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Notification Setting"-->
+<!--                android:textAlignment="center"-->
+<!--                android:textStyle="italic"-->
+<!--                android:textColor="@color/lighter_black"-->
+<!--                android:textSize="18dp"/>-->
+<!--        </LinearLayout>-->
 
         <LinearLayout
-            android:id="@+id/aboutus_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/gui_button_text_white"
@@ -86,6 +96,7 @@
             android:layout_marginTop="4dp"
             android:orientation="vertical">
             <TextView
+                android:id="@+id/aboutus_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="About Us"

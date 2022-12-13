@@ -49,7 +49,10 @@ public class DashboardFragment extends Fragment {
     public Calendar c;
     public String strDate;
     public String strTime;
+<<<<<<< Updated upstream
     private int balance;
+=======
+>>>>>>> Stashed changes
     private String entryTime;
 
     private final int LOAD_PAYMENT = 1;
@@ -71,8 +74,10 @@ public class DashboardFragment extends Fragment {
         final ImageView qrImageView = binding.imageView;
         final TextView durationTextView = binding.durationTextview;
         final TextView balanceTextView = binding.balanceTextview;
+        final MaterialCardView balanceCard = binding.balanceCard;
 
-        final MaterialCardView warningdebt = binding.warningdebt;
+
+//        final MaterialCardView warningdebt = binding.warningdebt;
 
         // Set Date Time
         final TextView dateText = binding.dateTextview;
@@ -152,9 +157,17 @@ public class DashboardFragment extends Fragment {
                 }
 
                 if (balance <= -50000) {
-                    warningdebt.setVisibility(View.VISIBLE);
+                    balanceCard.setCardBackgroundColor(getResources().getColor(R.color.lighter_black));
+                    balanceTextView.setTextColor(getResources().getColor(R.color.white));
+                    binding.balanceLabel.setTextColor(getResources().getColor(R.color.white));
+                    binding.balanceWarning.setVisibility(View.VISIBLE);
+//                    warningdebt.setVisibility(View.VISIBLE);
                 } else {
-                    warningdebt.setVisibility(View.GONE);
+//                    warningdebt.setVisibility(View.GONE);
+                    balanceCard.setCardBackgroundColor(getResources().getColor(R.color.yellow));
+                    balanceTextView.setTextColor(getResources().getColor(R.color.lighter_black));
+                    binding.balanceLabel.setTextColor(getResources().getColor(R.color.lighter_black));
+                    binding.balanceWarning.setVisibility(View.GONE);
                 }
             }
         });
