@@ -55,18 +55,104 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Halo Semuanya!"
+                android:textStyle="bold"
+                android:text="Hello GUYS N GIRLS!!!"
                 android:textAlignment="center"
                 android:textSize="18dp"
                 android:padding="4dp"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Loysing tidur Loy. Loysing udha tidur nih, Loy. Okeh dia udah tidur. halo halo. karena loysing sudah tidur maka kita tilus aja terus tilus-tilus apa coba tilus. aku diem aja deh."
+                android:text="We are the UwU team"
                 android:textAlignment="center"
                 android:lineHeight="28dp"
-                android:textSize="18dp"
+                android:textSize="18sp"
                 android:padding="4dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Adhitya Bagus Wicaksono (48211)"
+                android:textAlignment="center"
+                android:lineHeight="28dp"
+                android:textSize="18sp"
+                android:padding="4dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Alfred Kuhlman (47678)"
+                android:textAlignment="center"
+                android:lineHeight="28dp"
+                android:textSize="18sp"
+                android:padding="4dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Meitio Susanto (44843)"
+                android:textAlignment="center"
+                android:lineHeight="28dp"
+                android:textSize="18sp"
+                android:padding="4dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Loysing Ryono Ismanto (52026)"
+                android:textAlignment="center"
+                android:lineHeight="28dp"
+                android:textSize="18sp"
+                android:padding="4dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="and we present"
+                android:textAlignment="center"
+                android:lineHeight="28dp"
+                android:textSize="18sp"
+                android:padding="4dp"
+                android:layout_marginTop="29dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="LANPU"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:lineHeight="28dp"
+                android:textSize="36sp"
+                android:padding="4dp"
+                android:layout_marginTop="40dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="as our final project for the course\nIF570 Mobile Application Programming."
+                android:textAlignment="center"
+                android:layout_marginTop="40dp"
+                android:lineHeight="28dp"
+                android:textSize="18sp"
+                android:padding="4dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="We hope you enjoy using our app."
+                android:textAlignment="center"
+                android:lineHeight="28dp"
+                android:textSize="18sp"
+                android:padding="4dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="UwU)b"
+                android:textStyle="bold"
+                android:layout_marginTop="15dp"
+                android:fontFamily="sans-serif-condensed-medium"
+                android:textAlignment="center"
+                android:lineHeight="28dp"
+                android:textSize="36sp"
+                android:padding="4dp"/>
+
         </LinearLayout>
     </ScrollView>
 
