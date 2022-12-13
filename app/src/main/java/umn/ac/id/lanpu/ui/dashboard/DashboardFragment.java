@@ -49,7 +49,7 @@ public class DashboardFragment extends Fragment {
     public Calendar c;
     public String strDate;
     public String strTime;
-
+    private int balance;
     private String entryTime;
 
     private final int LOAD_PAYMENT = 1;
@@ -121,8 +121,8 @@ public class DashboardFragment extends Fragment {
 //                    Updata UI ketika terjadi perubahan dalam User
 //                    Get data
                 String name = dataSnapshot.child("name").getValue(String.class);
-                int balance = dataSnapshot.child("balance").getValue(int.class);
-                dashboardViewModel.balance.setValue(balance);
+                this.balance = dataSnapshot.child("balance").getValue(int.class);
+//                dashboardViewModel.balance.setValue(balance);
                 entryTime = dataSnapshot.child("entryTime").getValue(String.class);
 
 //                    Set data to View
@@ -162,7 +162,7 @@ public class DashboardFragment extends Fragment {
         LiveData<DataSnapshot> paymentLiveData = dashboardViewModel.getPaymentRequestLiveData(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid());
         paymentLiveData.observe(getViewLifecycleOwner(), dataSnapshot -> {
             if (dataSnapshot.exists()) {
-                if (dashboardViewModel.getBalance().getValue() > -50000)  viewTicketDetail(LOAD_PAYMENT);
+                if (balance > -50000)  viewTicketDetail(LOAD_PAYMENT);
                 else {
                     warningToast();
                     dashboardViewModel.pay(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid(), false);

@@ -17,6 +17,7 @@ import java.util.Date;
 import java.util.Objects;
 
 import umn.ac.id.lanpu.FirebaseQueryLiveData;
+import umn.ac.id.lanpu.FirebaseQuerySingleEventData;
 
 public class DashboardViewModel extends ViewModel {
     public MutableLiveData<Boolean> checker = new MutableLiveData<>();
@@ -26,7 +27,7 @@ public class DashboardViewModel extends ViewModel {
     private static DatabaseReference userReference;
     private static FirebaseQueryLiveData liveData;
 
-    public MutableLiveData<Integer> balance = new MutableLiveData<>();
+//    public MutableLiveData<Integer> balance = new MutableLiveData<>();
 
 
     public DashboardViewModel() {
@@ -51,10 +52,6 @@ public class DashboardViewModel extends ViewModel {
 
     public LiveData<Boolean> getChecker() {
         return checker;
-    }
-
-    public LiveData<Integer> getBalance() {
-        return balance;
     }
 
     public FirebaseQueryLiveData getPaymentRequestLiveData(String userID) {
