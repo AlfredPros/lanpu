@@ -49,10 +49,7 @@ public class DashboardFragment extends Fragment {
     public Calendar c;
     public String strDate;
     public String strTime;
-<<<<<<< Updated upstream
     private int balance;
-=======
->>>>>>> Stashed changes
     private String entryTime;
 
     private final int LOAD_PAYMENT = 1;
@@ -158,15 +155,9 @@ public class DashboardFragment extends Fragment {
 
                 if (balance <= -50000) {
                     balanceCard.setCardBackgroundColor(getResources().getColor(R.color.lighter_black));
-                    balanceTextView.setTextColor(getResources().getColor(R.color.white));
-                    binding.balanceLabel.setTextColor(getResources().getColor(R.color.white));
                     binding.balanceWarning.setVisibility(View.VISIBLE);
-//                    warningdebt.setVisibility(View.VISIBLE);
                 } else {
-//                    warningdebt.setVisibility(View.GONE);
-                    balanceCard.setCardBackgroundColor(getResources().getColor(R.color.yellow));
-                    balanceTextView.setTextColor(getResources().getColor(R.color.lighter_black));
-                    binding.balanceLabel.setTextColor(getResources().getColor(R.color.lighter_black));
+                    balanceCard.setCardBackgroundColor(getResources().getColor(R.color.fire));
                     binding.balanceWarning.setVisibility(View.GONE);
                 }
             }
@@ -175,7 +166,7 @@ public class DashboardFragment extends Fragment {
         LiveData<DataSnapshot> paymentLiveData = dashboardViewModel.getPaymentRequestLiveData(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid());
         paymentLiveData.observe(getViewLifecycleOwner(), dataSnapshot -> {
             if (dataSnapshot.exists()) {
-                if (balance > -50000)  viewTicketDetail(LOAD_PAYMENT);
+                if (balance > -50000) viewTicketDetail(LOAD_PAYMENT);
                 else {
                     warningToast();
                     dashboardViewModel.pay(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid(), false);
@@ -221,7 +212,7 @@ public class DashboardFragment extends Fragment {
         startActivity(getTicket);
     }
 
-    public void warningToast(){
+    public void warningToast() {
         Toast.makeText(getContext(), "Payment cannot be displayed! Please Top up.", Toast.LENGTH_SHORT).show();
         return;
     }

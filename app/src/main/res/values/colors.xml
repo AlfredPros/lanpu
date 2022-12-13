@@ -13,4 +13,6 @@
     <color name="lighter_black">#272727</color>
     <color name="random">#909090</color>
     <color name="somecolor">#004488</color>
+    <color name="amber">#FFBF00</color>
+    <color name="fire">#FDA50F</color>
 </resources>

@@ -112,7 +112,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:strokeColor="@color/black"
-                app:cardBackgroundColor="@color/yellow"
+                app:cardBackgroundColor="@color/fire"
                 app:strokeWidth="3dp"
                 app:cardCornerRadius="20dp"
                 android:layout_marginTop="-30dp"
@@ -136,7 +136,7 @@
                             android:layout_height="wrap_content"
                             android:text="YOUR BALANCE"
                             android:textStyle="bold"
-                            android:textColor="@color/black"
+                            android:textColor="@color/white"
                             android:textSize="16sp"/>
 
                         <TextView
@@ -145,7 +145,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:text="Rp 100.000,-"
-                            android:textColor="@color/black"
+                            android:textColor="@color/white"
                             android:textSize="20sp"/>
                         <TextView
                             android:id="@+id/balance_warning"
