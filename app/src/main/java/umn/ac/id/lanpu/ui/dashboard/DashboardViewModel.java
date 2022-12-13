@@ -1,7 +1,5 @@
 package umn.ac.id.lanpu.ui.dashboard;
 
-import android.util.Log;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -11,13 +9,10 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Objects;
 
 import umn.ac.id.lanpu.FirebaseQueryLiveData;
-import umn.ac.id.lanpu.FirebaseQuerySingleEventData;
+
 
 public class DashboardViewModel extends ViewModel {
     public MutableLiveData<Boolean> checker = new MutableLiveData<>();
@@ -26,9 +21,6 @@ public class DashboardViewModel extends ViewModel {
     private static String userID;
     private static DatabaseReference userReference;
     private static FirebaseQueryLiveData liveData;
-
-//    public MutableLiveData<Integer> balance = new MutableLiveData<>();
-
 
     public DashboardViewModel() {
         userID = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
@@ -58,7 +50,7 @@ public class DashboardViewModel extends ViewModel {
         return new FirebaseQueryLiveData(paymentRequestTableReference.child(userID));
     }
 
-    public LiveData<DataSnapshot> getEntryTime(){
+    public LiveData<DataSnapshot> getEntryTime() {
         return new FirebaseQueryLiveData(userReference.child("entryTime"));
     }
 }
