@@ -65,16 +65,10 @@
                 android:value="umn.ac.id.lanpu.LoginSignUpActivity" />
         </activity>
         <activity
-            android:name=".ProcessedActivity"
-            android:exported="false" />
-        <activity
             android:name=".ProcessingActivity"
             android:exported="false" />
         <activity
             android:name=".ui.notifications.ChangePassword"
-            android:exported="false" />
-        <activity
-            android:name=".ui.notifications.NotificationSettings"
             android:exported="false" />
         <activity
             android:name=".ui.notifications.AboutUs"

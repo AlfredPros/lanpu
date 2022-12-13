@@ -9,11 +9,6 @@
     android:paddingHorizontal="40dp"
     android:paddingVertical="50dp">
 
-<!--    <androidx.fragment.app.FragmentContainerView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:name="umn.ac.id.lanpu.ui.dashboard.ProcessingFragment"-->
-<!--        tools:layout="@layout/fragment_processing" />-->
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

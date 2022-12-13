@@ -22,21 +22,6 @@ public class LoginSignUpActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d("SIGNED", "CREATED");
-        setContentView(R.layout.login_signup_screen);
-
-        Button loginButton = findViewById(R.id.loginButton);
-        Button signUpButton = findViewById(R.id.signUpButton);
-
-        loginButton.setOnClickListener(view -> {
-            Intent intentLogin = new Intent(LoginSignUpActivity.this, LoginActivity.class);
-            startActivity(intentLogin);
-//                finish();
-        });
-
-        signUpButton.setOnClickListener(view -> {
-            Intent intentSignUp = new Intent(LoginSignUpActivity.this, SignUpActivity.class);
-            startActivity(intentSignUp);
-        });
     }
 
     @Override
